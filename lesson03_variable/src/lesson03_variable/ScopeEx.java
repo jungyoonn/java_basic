@@ -9,6 +9,6 @@ public class ScopeEx {
 			name = "홍길동";
 			String email = "hong@test.com";
 		}
-		email = "hong@test.com";
+		// email = "hong@test.com";
 	}
 }
