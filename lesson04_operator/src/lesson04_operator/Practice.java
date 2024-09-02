@@ -25,19 +25,20 @@ public class Practice {
 		System.out.print("키를 입력하세요 : ");
 		int height = scanner.nextInt();
 		
-		//System.out.print("보호자 동반입니까? : ");
-		//String isParent = scanner.nextLine();
-		
 		//boolean parent = isParent.equals("네") ? true : false;
+		
 		boolean parent = false;
 		boolean hearchDease = true;
+		boolean result1 = age >= 6 && height >= 120 || height >= 120 && parent && !hearchDease;
+		result1 = height >= 120 && (age >=6 || parent) && !hearchDease;
 		//System.out.print("심장 질환이 있습니까? : ");
 		//String isDease = scanner.nextLine();
 		//boolean hearchDease = isDease.equals(isDease) ? true : false;
 		//System.out.println(hearchDease);
-		System.out.println(age > 5 ? "탑승 가능" : height >= 120 && parent ? "탑승 가능" : "탑승 불가");
-		System.out.println(height < 120 ? "120cm 이상만 탑승할 수 있습니다" : "탑승 가능");
-		System.out.println(hearchDease ? "탑승 불가" : "탑승 가능");
+//		System.out.println(age > 5 ? "탑승 가능" : height >= 120 && parent ? "탑승 가능" : "탑승 불가");
+//		System.out.println(height < 120 ? "120cm 이상만 탑승할 수 있습니다" : "탑승 가능");
+//		System.out.println(hearchDease ? "탑승 불가" : "탑승 가능");
+		System.out.println(result1);
 		
 		// 05
 		int year = 2600;
