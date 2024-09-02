@@ -77,5 +77,24 @@ public class Practice {
 			cnt++;
 		}
 		System.out.println("총 주사위 굴린 횟수는 : " + cnt + "회");
+		
+		// 04번 수정
+		System.out.println();
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j <= i; j++) {
+				System.out.printf("*");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		
+		// 05번 수정
+		for(int i = 5; i > 0; i--) {
+			for(int j = 0; j < i; j++) {
+				System.out.printf("*");
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 }
