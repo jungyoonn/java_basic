@@ -35,7 +35,7 @@ public class Exer {
 		System.out.println("=======================");
 		System.out.println();
 		
-		// 03 입력받은 두 수의 최대공약수
+		// 03 입력받은 두 수의 최대공약수 
 		System.out.print("두 수를 입력하세요 > ");
 		int num3 = scanner.nextInt();
 		int num4 = scanner.nextInt();

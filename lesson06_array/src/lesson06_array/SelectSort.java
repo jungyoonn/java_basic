@@ -22,8 +22,8 @@ public class SelectSort {
 					num = j;
 				}
 			}
-			int tmp = arr[i]; // 값을 배열 오른쪽부터 정렬
-			arr[i] = min;
+			int tmp = arr[arr.length - i - 1]; // 값을 배열 오른쪽부터 정렬
+			arr[arr.length - i - 1] = min;
 			arr[num] = tmp;
 			min = 51;
 		}
@@ -52,6 +52,30 @@ public class SelectSort {
 			arr[arr.length - i - 1] = max;
 			arr[num] = tmp;
 			max = 0;
+		}
+		
+		System.out.println(Arrays.toString(arr));
+		System.out.println("============================");
+		
+		// 내림차순
+		for(int i = 0; i < arr.length; i++) { // 배열에 난수 넣기
+			arr[i] = (int)(Math.random()*50) + 1;
+		}
+		System.out.println(Arrays.toString(arr));
+		int min2 = arr[0];
+		
+		for(int i = 0; i < arr.length; i++) {
+			for(int j = arr.length-1; j >= 0; j--) { 
+				if(arr[j] < min2) {
+					min2 = arr[j];
+					num = j;
+				}
+			}
+			System.out.println(min2);
+			int tmp = arr[i]; 
+			arr[i] = min2;
+			arr[num] = tmp;
+			min2 = 51;
 		}
 		
 		System.out.println(Arrays.toString(arr));
