@@ -23,38 +23,38 @@ public class Exer {
 		System.out.println();
 		
 		// 02 입력받은 두 수 사이의 합계
-//		System.out.print("두 수를 입력하세요 > ");
-//		int num1 = scanner.nextInt();
-//		int num2 = scanner.nextInt();
-//		int sum = 0;
-//		
-//		for(int i = num1; i <= num2; i++) {
-//			sum += i;
-//		}
-//		System.out.println("합계는 " + sum);
-//		System.out.println("=======================");
-//		System.out.println();
-//		
-//		// 03 입력받은 두 수의 최대공약수 이중 for 문
-//		System.out.print("두 수를 입력하세요 > ");
-//		int num3 = scanner.nextInt();
-//		int num4 = scanner.nextInt();
-//		int min = 0;
-//		
-//		if(num3 < num4) {
-//			min = num3;
-//		} else {
-//			min = num4;
-//		}
-//		
-//		for(int i = min; i > 0; i--) {
-//			if(num3 % i == 0 && num4 % i == 0) {
-//				System.out.println("두 수의 최대공약수는 " + i);
-//				break;
-//			}
-//		}
-//		System.out.println();
-//		
+		System.out.print("두 수를 입력하세요 > ");
+		int num1 = scanner.nextInt();
+		int num2 = scanner.nextInt();
+		int sum = 0;
+		
+		for(int i = num1; i <= num2; i++) {
+			sum += i;
+		}
+		System.out.println("합계는 " + sum);
+		System.out.println("=======================");
+		System.out.println();
+		
+		// 03 입력받은 두 수의 최대공약수
+		System.out.print("두 수를 입력하세요 > ");
+		int num3 = scanner.nextInt();
+		int num4 = scanner.nextInt();
+		int min = 0;
+		
+		if(num3 < num4) {
+			min = num3;
+		} else {
+			min = num4;
+		}
+		
+		for(int i = min; i > 0; i--) {
+			if(num3 % i == 0 && num4 % i == 0) {
+				System.out.println("두 수의 최대공약수는 " + i);
+				break;
+			}
+		}
+		System.out.println();
+		
 		// 04 소수 여부 확인
 		int num5 = (int)(Math.random()*100) + 1;
 		boolean isPrime = true;
