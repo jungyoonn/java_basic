@@ -78,6 +78,19 @@ public class Practice {
 		}
 		System.out.println();
 		
+		// 06 응용
+		for(int i = -2; i < 3; i++) {
+			for(int j = -2; j < 3; j++) {
+				if(i * j <= 1 && i * j >= -1) {
+					System.out.print("*");
+				} else {
+					System.out.print(" ");
+				}
+			}
+			System.out.println();
+		}
+		System.out.println();
+		
 		// 07 
 		int cnt = 0;
 		int dice = 0;
