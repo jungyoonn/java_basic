@@ -94,6 +94,7 @@ public class Practice {
 				System.out.printf("*");
 			}
 			System.out.println();
+			
 		}
 		System.out.println();
 	}
