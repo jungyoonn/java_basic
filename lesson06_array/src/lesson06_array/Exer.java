@@ -22,45 +22,69 @@ public class Exer {
 		System.out.println("이동할 거리는 " + result + "칸");
 		System.out.println();
 		
+		// 피보나치 수열
+		int pSum = 1;
+		
+		for(int i = 1; i < 1000; i+=pSum) {
+			System.out.print(pSum + " ");
+			System.out.print(i + " ");
+			pSum += i;
+		}
+		System.out.println();
+		System.out.println();
+		
 		// 02 입력받은 두 수 사이의 합계
-		System.out.print("두 수를 입력하세요 > ");
-		int num1 = scanner.nextInt();
-		int num2 = scanner.nextInt();
-		int sum = 0;
-		
-		for(int i = num1; i <= num2; i++) {
-			sum += i;
-		}
-		System.out.println("합계는 " + sum);
-		System.out.println("=======================");
-		System.out.println();
-		
-		// 03 입력받은 두 수의 최대공약수 
-		System.out.print("두 수를 입력하세요 > ");
-		int num3 = scanner.nextInt();
-		int num4 = scanner.nextInt();
-		int min = 0;
-		
-		if(num3 < num4) {
-			min = num3;
-		} else {
-			min = num4;
-		}
-		
-		for(int i = min; i > 0; i--) {
-			if(num3 % i == 0 && num4 % i == 0) {
-				System.out.println("두 수의 최대공약수는 " + i);
-				break;
-			}
-		}
-		System.out.println();
+//		System.out.print("두 수를 입력하세요 > ");
+//		int num1 = scanner.nextInt();
+//		int num2 = scanner.nextInt();
+//		int sum = 0;
+//		
+//		for(int i = num1; i <= num2; i++) {
+//			sum += i;
+//		}
+//		System.out.println("합계는 " + sum);
+//		System.out.println("=======================");
+//		System.out.println();
+//		
+//		// 03 입력받은 두 수의 최대공약수 
+//		System.out.print("두 수를 입력하세요 > ");
+//		int num3 = scanner.nextInt();
+//		int num4 = scanner.nextInt();
+//		int min = 0;
+//		
+//		if(num3 < num4) {
+//			min = num3;
+//		} else {
+//			min = num4;
+//		}
+//		
+//		for(int i = min; i > 0; i--) {
+//			if(num3 % i == 0 && num4 % i == 0) {
+//				System.out.println("두 수의 최대공약수는 " + i);
+//				break;
+//			}
+//		}
+//		
+//		// 03-1 두 수의 최소공배수
+//		// a * b / 최대공약수
+//		outer:
+//		for(int i = num3; i <= num3*num4; i+=num3) {
+//			for(int j = num4; j <= num3*num4; j+=num4) {
+//				if(i == j) {
+//					System.out.println("두 수의 최소공배수는 " + j);
+//					break outer;
+//				}
+//			}
+//		}
+//		//System.out.println("두 수의 최소공배수는 " + (num3 * num4)/6);
+//		System.out.println();
 		
 		// 04 소수 여부 확인
 		int num5 = (int)(Math.random()*100) + 1;
 		boolean isPrime = true;
 		
-		for(int i = 2; i <= 100; i++) {
-			if(num5 % i == 0 && num5 != i) {
+		for(int i = 2; i < num5; i++) {
+			if(num5 % i == 0) {
 				System.out.println(num5 + " : 소수가 아닙니다");
 				isPrime = false;
 				break;
