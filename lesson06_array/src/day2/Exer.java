@@ -36,8 +36,6 @@ public class Exer {
 				System.out.println("입력을 종료합니다");
 				break;
 			}
-			
-			System.out.println(inputName);
 			names[cnt] = inputName;
 			cnt++;
 		}
