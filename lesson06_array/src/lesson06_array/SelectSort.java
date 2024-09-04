@@ -58,26 +58,26 @@ public class SelectSort {
 		System.out.println("============================");
 		
 		// 내림차순
-		for(int i = 0; i < arr.length; i++) { // 배열에 난수 넣기
-			arr[i] = (int)(Math.random()*50) + 1;
-		}
-		System.out.println(Arrays.toString(arr));
-		int min2 = arr[0];
-		
-		for(int i = 0; i < arr.length; i++) {
-			for(int j = arr.length-1; j >= 0; j--) { 
-				if(arr[j] < min2) {
-					min2 = arr[j];
-					num = j;
-				}
-			}
-			System.out.println(min2);
-			int tmp = arr[i]; 
-			arr[i] = min2;
-			arr[num] = tmp;
-			min2 = 51;
-		}
-		
-		System.out.println(Arrays.toString(arr));
+//		for(int i = 0; i < arr.length; i++) { // 배열에 난수 넣기
+//			arr[i] = (int)(Math.random()*50) + 1;
+//		}
+//		System.out.println(Arrays.toString(arr));
+//		int min2 = arr[0];
+//		
+//		for(int i = 0; i < arr.length; i++) {
+//			for(int j = 0; j < arr.length-1 - i; j++) { 
+//				if(arr[j] < min2) {
+//					min2 = arr[j];
+//					num = j;
+//				}
+//			}
+//			System.out.println(min2 + ", " + num);
+//			int tmp = arr[i]; 
+//			arr[i] = min2;
+//			arr[num] = tmp;
+//			min2 = 51;
+//		}
+//		
+//		System.out.println(Arrays.toString(arr));
 	}
 }
