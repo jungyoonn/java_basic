@@ -19,12 +19,14 @@ public class MyQueue {
 	}
 
 	int size() {
-		if(inCnt < outCnt) {
-			System.out.println("오류");
-//			return -1;
-			throw new ArrayIndexOutOfBoundsException();
+		try {
+			if(inCnt < outCnt) {
+				System.out.println("오류");
+	//			return -1;
+			}
+		} catch (Exception e) {
+			System.out.println("오류입니다 : " + e.getMessage());
 		}
-		
 		for(int print : items) {
 			if(print == 0) {
 				break;
