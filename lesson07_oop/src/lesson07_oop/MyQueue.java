@@ -2,7 +2,7 @@ package lesson07_oop;
 
 import java.util.Arrays;
 
-public class MyQueue {
+public class MyQueue{
 	private int[] items = new int[3];
 	private int inCnt;
 	private int outCnt;
@@ -19,7 +19,7 @@ public class MyQueue {
 		items[inCnt++] = item;
 	}
 
-	int size() {
+	int size() throws Exception {
 		if(inCnt < outCnt) {
 			System.out.println("오류");
 			return -1;
@@ -30,6 +30,7 @@ public class MyQueue {
 			}
 			System.out.print(print + " ");
 		}
+		
 		System.out.println();
 		System.out.println(Arrays.toString(items));
 		return inCnt - outCnt;
