@@ -2,13 +2,12 @@ package lesson07_oop;
 
 import java.util.Arrays;
 
-public class MyQueue{
+public class MyQueue {
 	private int[] items = new int[3];
 	private int inCnt;
 	private int outCnt;
 	
 	int pop() {
-		
 		return items[outCnt++];
 	}
 	
@@ -19,14 +18,16 @@ public class MyQueue{
 		items[inCnt++] = item;
 	}
 
-	int size() throws Exception {
+	int size() {
 		if(inCnt < outCnt) {
 			System.out.println("오류");
-			return -1;
+//			return -1;
+			throw new ArrayIndexOutOfBoundsException();
 		}
+		
 		for(int print : items) {
 			if(print == 0) {
-				break;
+				//break;
 			}
 			System.out.print(print + " ");
 		}
@@ -35,4 +36,5 @@ public class MyQueue{
 		System.out.println(Arrays.toString(items));
 		return inCnt - outCnt;
 	}
+
 }
