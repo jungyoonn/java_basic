@@ -21,5 +21,7 @@ public class StackMain {
 		System.out.println(stack.size());
 		System.out.println(stack.pop());
 		System.out.println(stack.size());
+		
+		System.out.println(stack.peek()); // 마지막 값을 조회만 함
 	}
 }
