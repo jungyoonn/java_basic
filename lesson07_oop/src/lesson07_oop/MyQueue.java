@@ -27,7 +27,7 @@ public class MyQueue {
 		
 		for(int print : items) {
 			if(print == 0) {
-				//break;
+				break;
 			}
 			System.out.print(print + " ");
 		}
