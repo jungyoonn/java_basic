@@ -11,7 +11,7 @@ public class Main {
 	}
 	
 	static void sRun() {
-//		System.out.println(i); // 클래스 내에서 인스턴스 변수 호출 불가능
+		//System.out.println(i); // 클래스 내에서 인스턴스 변수 호출 불가능
 							   // 인스턴스 생성이 일어나기 전이기 때문 / this도 사용 불가
  	}
 	
