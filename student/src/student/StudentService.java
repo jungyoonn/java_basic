@@ -3,8 +3,8 @@ package student;
 import java.util.Arrays;
 // Logic
 public class StudentService {
-	Student[] students = new Student[5];
-	int cnt;
+	static Student[] students = new Student[5];
+	static int cnt;
 	
 	{
 		students[cnt++] = new Student(1, "새똥이", 80, 90, 100);
@@ -45,14 +45,19 @@ public class StudentService {
 	
 	// 이름, 점수 
 	void modify() {
+		Student student = null;
 		int mNo = StudentUtils.nextInt("수정할 학생의 학번 입력");
-		
-		for(int i = 0; i < cnt; i++) {
+		int i;
+		for(i = 0; i < cnt; i++) {
+//			if(students[i].no == mNo) {
+//				students[i].name = StudentUtils.nextLine("수정할 이름");
+//				students[i].kor = StudentUtils.nextInt("수정할 국어 점수");
+//				students[i].eng = StudentUtils.nextInt("수정할 영어 점수");
+//				students[i].mat = StudentUtils.nextInt("수정할 수학 점수");
+//			}
 			if(students[i].no == mNo) {
-				students[i].name = StudentUtils.nextLine("수정할 이름");
-				students[i].kor = StudentUtils.nextInt("수정할 국어 점수");
-				students[i].eng = StudentUtils.nextInt("수정할 영어 점수");
-				students[i].mat = StudentUtils.nextInt("수정할 수학 점수");
+				student = students[i];
+				break;
 			}
 		}
 	}

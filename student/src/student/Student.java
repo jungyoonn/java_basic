@@ -30,5 +30,10 @@ public class Student {
 				+ total() + ", 평균 : " + avg() + "]";
 	}
 	
-	
+	void update() {
+		this.name = StudentUtils.nextLine("수정할 이름");
+		this.kor = StudentUtils.nextInt("수정할 국어 점수");
+		this.eng = StudentUtils.nextInt("수정할 영어 점수");
+		this.mat = StudentUtils.nextInt("수정할 수학 점수");
+	}
 }
