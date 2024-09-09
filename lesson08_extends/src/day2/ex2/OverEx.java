@@ -2,10 +2,12 @@ package day2.ex2;
 
 public class OverEx {
 	public static void main(String[] args) {
+		// bind : 관계 형성
+		//		  어떤 객체가 특정 멤버를 호출할 때 대상을 지정
 		A obj = new B();
 		
-		System.out.println(obj.i);
-		obj.m();
+		System.out.println(obj.i); // 정적 바인드 : 컴파일 시 지정
+		obj.m(); // 동적 바인드의 결과물(오버라이드) : 런타임 시 지정
 		System.out.println(obj.si);
 		obj.sm();
 	}
