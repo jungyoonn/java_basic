@@ -26,8 +26,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [학번 : " + no + ", 이름 : " + name + ", 국어 점수 : " + kor + ", 영어 점수 : " + eng + ", 수학 점수 : " + mat + ", 총점 : "
-				+ total() + ", 평균 : " + avg() + "]";
+		return String.format("%4d %6s %5d %5d %6d %6d %7.2f", no, name, kor, eng, mat, total(), avg());
 	}
 	
 	void update() {

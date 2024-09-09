@@ -39,16 +39,17 @@ public class StudentService {
 		
 		for(int i = 0; i < cnt; i++) {
 			if(students[i].no == -1) continue;
-			System.out.printf("%4d %6s %5d %5d %6d %6d %7.2f\n", 
-								students[i].no,
-								students[i].name,
-								students[i].kor,
-								students[i].eng,
-								students[i].mat,
-								students[i].total(),
-								students[i].avg()
-								
-					);
+//			System.out.printf("%4d %6s %5d %5d %6d %6d %7.2f\n", 
+//								students[i].no,
+//								students[i].name,
+//								students[i].kor,
+//								students[i].eng,
+//								students[i].mat,
+//								students[i].total(),
+//								students[i].avg()
+//								
+//					);
+			System.out.println(students[i]);
 		}
 		System.out.println();
 	}
