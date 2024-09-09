@@ -4,7 +4,9 @@ public class PolyEx {
 	public static void main(String[] args) {
 		Child c = new Child();
 				
+		c.walk();
 		c.run();
+		c.eat();
 		
 		// 다형성!! 자동 형변환이 일어난다
 		//			좌항이 우항보다 조상이기만 하면 가능
