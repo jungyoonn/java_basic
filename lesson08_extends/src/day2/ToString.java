@@ -14,6 +14,7 @@ public class ToString {
 		Object object = 10; // 모든 타입의 데이터 전부 가능
 		object.toString(); // 전부 문자열로 표현해 줌
 
+		
 		Object ob = new Object();
 		System.out.println(ob);
 		System.out.println(ob.toString());
