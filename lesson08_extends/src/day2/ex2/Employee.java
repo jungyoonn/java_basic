@@ -1,6 +1,6 @@
 package day2.ex2;
 
-abstract class Employee {
+public abstract class Employee {
 	String name;
 	
 	public Employee(String name) {
