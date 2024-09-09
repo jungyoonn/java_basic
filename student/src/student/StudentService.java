@@ -38,7 +38,7 @@ public class StudentService {
 		System.out.println("==================================================");
 		
 		for(int i = 0; i < cnt; i++) {
-			if(students[i].no == -1) continue;
+			if(students[i].getNo() == -1) continue;
 //			System.out.printf("%4d %6s %5d %5d %6d %6d %7.2f\n", 
 //								students[i].no,
 //								students[i].name,
@@ -62,10 +62,10 @@ public class StudentService {
 			return;
 		}
 		
-		student.name = nextLine("수정할 이름");
-		student.kor = nextInt("수정할 국어 점수");
-		student.eng = nextInt("수정할 영어 점수");
-		student.mat = nextInt("수정할 수학 점수");
+		student.setName(nextLine("수정할 이름"));
+		student.setKor(nextInt("수정할 국어 점수"));
+		student.setEng(nextInt("수정할 영어 점수"));
+		student.setMat(nextInt("수정할 수학 점수"));
 		
 //			if(students[i].no == mNo) {
 //				students[i].name = StudentUtils.nextLine("수정할 이름");
@@ -103,7 +103,7 @@ public class StudentService {
 		int no = nextInt("학생의 학번 입력 > ");
 		
 		for(int i = 0; i < cnt; i++) {
-			if(no == students[i].no) {
+			if(no == students[i].getNo()) {
 				student = students[i];
 			}
 		}
@@ -125,7 +125,7 @@ public class StudentService {
 //				students[i].eng = StudentUtils.nextInt("수정할 영어 점수");
 //				students[i].mat = StudentUtils.nextInt("수정할 수학 점수");
 //			}
-			if(students[i].no == mNo) {
+			if(students[i].getNo() == mNo) {
 				student = students[i];
 				break;
 			}
@@ -136,10 +136,10 @@ public class StudentService {
 		int rNo = nextInt("삭제할 학생의 학번 입력");
 		
 		for(int i = 0; i < cnt; i++) {
-			if(students[i].no == rNo) {
-				String yn = nextLine(students[i].name +" 학생을 삭제하시겠습니까? (y/n)");
+			if(students[i].getNo() == rNo) {
+				String yn = nextLine(students[i].getName() +" 학생을 삭제하시겠습니까? (y/n)");
 				if(yn.equals("y")) {
-				students[i].no = -1;	
+				students[i].setNo(-1);	
 				System.out.println("삭제를 완료했습니다.");
 				System.out.println();
 				} else if(yn.equals("n")) {
