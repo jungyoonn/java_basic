@@ -5,6 +5,9 @@ public class ComplexerMain {
 		Complexer com = new Complexer();
 		System.out.println(Complexer.INK);
 		System.out.println(Complexer.FAX_NUMBER);
+		
+		System.out.println(Printer.INK);
+		
 		com.print();
 		com.scan();
 		com.send("01-1234-7878");
