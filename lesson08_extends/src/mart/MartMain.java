@@ -11,6 +11,8 @@ public class MartMain {
 		Product p3 = new Aircon();
 		System.out.println(p3);
 		
+		System.out.println();
+		
 		Buyer buyer = new Buyer(500);
 		
 		while(true) {
