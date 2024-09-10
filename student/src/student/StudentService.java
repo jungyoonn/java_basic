@@ -98,7 +98,7 @@ public class StudentService {
 	}
 	
 	// 중복된 기능 분리
-	Student findByNo() {
+	private Student findByNo() {
 		Student student = null;
 		int no = nextInt("학생의 학번 입력 > ");
 		
