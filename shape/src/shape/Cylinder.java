@@ -27,6 +27,6 @@ public class Cylinder extends Shape {
 
 	@Override
 	public String toString() {
-		return "반지름이 " + r +"이고 높이가 "+ h + "인 원의 겉넓이는 " + length() + ", 부피는 " + volume();
+		return "반지름이 " + r +"이고 높이가 "+ h + "인 원기둥의 겉넓이는 " + length() + ", 부피는 " + volume();
 	}
 }
