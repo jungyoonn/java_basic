@@ -4,7 +4,7 @@ package mart;
 public abstract class Product {
 	private String name;
 	private int price;
-	
+
 	public String getName() {
 		return name;
 	}
