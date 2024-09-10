@@ -1,13 +1,26 @@
 package shape;
 
 public class Circle extends Shape {
-	private int r;
+	private static int r;
 
 	public Circle(int r) {
 		super("원");
-		this.r = r;
+		this.setR(r);
 	}
 	
+	public Circle(String string) {
+		super("원");
+		this.setR(r);
+	}
+	
+	public static int getR() {
+		return r;
+	}
+	
+	public void setR(int r) {
+		this.r = r;
+	}
+
 	@Override
 	public double length() {
 		return 2 * r * Math.PI;

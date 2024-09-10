@@ -1,12 +1,33 @@
 package shape;
 
 public class Rectangle extends Shape {
-	private int a;
-	private int b;
+	private static int a;
+	private static int b;
 	
 	public Rectangle(int a, int b) {
 		super("사각형");
+		this.setA(a);
+		this.setB(b);
+	}
+
+	public Rectangle(String string) {
+		super("사각형");
+		
+	}
+	
+	public static int getA() {
+		return a;
+	}
+	
+	public void setA(int a) {
 		this.a = a;
+	}
+	
+	public static int getB() {
+		return b;
+	}
+	
+	public void setB(int b) {
 		this.b = b;
 	}
 

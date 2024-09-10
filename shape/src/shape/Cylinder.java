@@ -1,12 +1,10 @@
 package shape;
 
-public class Cylinder extends Shape {
-	private int r;
+public class Cylinder extends Circle {
 	private int h;
 	
-	public Cylinder(int r, int h) {
+	public Cylinder(int h) {
 		super("원기둥");
-		this.r = r;
 		this.h = h;
 	}
 	
@@ -17,16 +15,17 @@ public class Cylinder extends Shape {
 	
 	@Override
 	public double volume() {
-		return r * r * Math.PI * h;
+		return super.area() * h;
 	}
 	
 	@Override
-	double area() {
-		return (2 * r * Math.PI * h) + (2 * Math.PI * r * r);
+	public double area() {
+		return (super.length() * h) + (2 * super.area());
 	}
 
 	@Override
 	public String toString() {
-		return "반지름이 " + r +"이고 높이가 "+ h + "인 원기둥의 겉넓이는 " + area() + ", 부피는 " + volume();
+		return "반지름이 " + getR() +"이고 높이가 "+ h + "인 원기둥의 겉넓이는 " + area() + 
+				", 부피는 " + volume();
 	}
 }
