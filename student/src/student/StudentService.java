@@ -5,8 +5,8 @@ import static student.StudentUtils.*;
 import java.util.Arrays;
 // Logic
 public class StudentService {
-	static Student[] students = new Student[2];
-	static int cnt;
+	private Student[] students = new Student[2];
+	private int cnt;
 	
 	{
 		students[cnt++] = new Student(1, "새똥이", 80, 90, 100);
