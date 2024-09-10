@@ -5,7 +5,7 @@ public class StarcraftMain {
 		SCV scv = new SCV();
 		Marine marine = new Marine();
 		
-		scv.repair(marine);
+//		scv.repair(marine);
 		
 		Tank tank = new Tank();
 		tank.toggleSiege();
@@ -16,5 +16,8 @@ public class StarcraftMain {
 		Repairable r2 = new SCV();
 		
 		Unit[] units = new Unit[12];
+		
+		Repairable.sm();
+		tank.dm(); // 디폴트 메서드는 구상 클래스에서 생성된 객체 이름으로 호출해야 함
 	}
 }
