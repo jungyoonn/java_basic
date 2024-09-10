@@ -14,7 +14,7 @@ public class Hexa extends Shape {
 	
 	@Override
 	public double length() {
-		return 2 * (a * b + b * c + a * c);
+		return 0;
 	}
 
 	@Override
@@ -24,11 +24,11 @@ public class Hexa extends Shape {
 	
 	@Override
 	public double area() {
-		return 0;
+		return 2 * (a * b + b * c + a * c);
 	}
 	
 	@Override
 	public String toString() {
-		return "가로가 " + a +"이고 세로가 "+ b + "이고 높이가 " + c + "인 육면체의 겉넓이는 " + length() + ", 부피는 " + volume();
+		return "가로가 " + a +"이고 세로가 "+ b + "이고 높이가 " + c + "인 육면체의 겉넓이는 " + area() + ", 부피는 " + volume();
 	}
 }
