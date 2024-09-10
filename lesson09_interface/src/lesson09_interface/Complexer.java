@@ -20,4 +20,5 @@ public class Complexer implements Printer, Scanner, Fax {
 	public void print() {
 		System.out.println("출력 실행");
 	}
+	// 오버라이드 어노테이션은 해당 메서드가 오버라이딩이 되었는지 검증하는 목적
 }
