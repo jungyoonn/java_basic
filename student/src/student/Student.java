@@ -1,11 +1,12 @@
 package student;
 
-public class Student {
+public class Student implements Cloneable {
 	private int no;
 	private String name;
 	private int kor;
 	private int eng;
 	private int mat;
+	private int[] arr;
 	
 	public Student() { }
 
@@ -16,6 +17,15 @@ public class Student {
 		this.kor = kor;
 		this.eng = eng;
 		this.mat = mat;
+	}
+	
+	public Student(Student s ) {
+		no = s.no;
+		name = s.name;
+		kor = s.kor;
+		eng = s.eng;
+		mat = s.mat;
+		arr = s.arr.clone();
 	}
 	
 	// 학번
@@ -84,4 +94,16 @@ public class Student {
 		this.eng = StudentUtils.nextInt("수정할 영어 점수");
 		this.mat = StudentUtils.nextInt("수정할 수학 점수");
 	}
+
+	
+	// 클론 연습용	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		Student obj = null;
+//		obj = (Student)super.clone(); // 얕은 복사
+//		obj.arr = arr.clone(); // 깊은 복사
+		
+		return super.clone();
+	}
+	
 }
