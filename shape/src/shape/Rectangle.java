@@ -1,34 +1,21 @@
 package shape;
 
-public class Rectangle extends Shape {
+public class Rectangle extends Shape implements Shape2D {
 	private int a;
 	private int b;
 	
 	public Rectangle(int a, int b) {
 		super("사각형");
-		this.setA(a);
-		this.setB(b);
-	}
-
-	public Rectangle(String string) {
-		super("사각형");
-		
+		this.a = a;
+		this.b = b;
 	}
 	
 	public int getA() {
 		return a;
 	}
 	
-	public void setA(int a) {
-		this.a = a;
-	}
-	
 	public int getB() {
 		return b;
-	}
-	
-	public void setB(int b) {
-		this.b = b;
 	}
 
 	@Override
@@ -39,11 +26,6 @@ public class Rectangle extends Shape {
 	@Override
 	public double area() {
 		return a * b;
-	}
-	
-	@Override
-	public double volume() {
-		return 0;
 	}
 	
 	@Override

@@ -1,24 +1,15 @@
 package shape;
 
-public class Circle extends Shape {
+public class Circle extends Shape implements Shape2D {
 	private int r;
 
 	public Circle(int r) {
 		super("원");
-		this.setR(r);
-	}
-	
-	public Circle(String string) {
-		super("원");
-		this.setR(r);
+		this.r = r;
 	}
 	
 	public int getR() {
 		return r;
-	}
-	
-	public void setR(int r) {
-		this.r = r;
 	}
 
 	@Override
@@ -29,11 +20,6 @@ public class Circle extends Shape {
 	@Override
 	public double area() {
 		return r * r * Math.PI;
-	}
-
-	@Override
-	public double volume() {
-		return 0;
 	}
 	
 	@Override
