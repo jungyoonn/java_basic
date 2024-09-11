@@ -76,7 +76,7 @@ public class StudentService {
 			try {
 				kor = nextInt("국어 점수");
 			} catch(NumberFormatException e) {
-				System.out.println("점수는 숫자만 입력 가능합니다.");
+				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
 				System.out.println();
 				continue;
 			} 
@@ -87,7 +87,7 @@ public class StudentService {
 			try {
 				eng = nextInt("영어 점수");
 			} catch(NumberFormatException e) {
-				System.out.println("점수는 숫자만 입력 가능합니다.");
+				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
 				System.out.println();
 				continue;
 			} 
@@ -173,7 +173,7 @@ public class StudentService {
 			try {
 				kor = nextInt("수정할 국어 점수");
 			} catch(NumberFormatException e) {
-				System.out.println("점수는 숫자만 입력 가능합니다.");
+				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
 				System.out.println();
 				continue;
 			} 
@@ -184,7 +184,7 @@ public class StudentService {
 			try {
 				eng = nextInt("수정할 영어 점수");
 			} catch(NumberFormatException e) {
-				System.out.println("점수는 숫자만 입력 가능합니다.");
+				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
 				System.out.println();
 				continue;
 			} 
@@ -249,7 +249,7 @@ public class StudentService {
 				throw new RangeException(0, 100);
 			}
 		} catch (RangeException e) { 
-			System.out.println("0과 100 이하의 점수만 입력 가능합니다.");
+			System.out.println("0점과 100점 이하의 점수만 입력 가능합니다.");
 			System.out.println();
 			return false;
 		}
