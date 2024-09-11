@@ -1,8 +1,8 @@
 package shape;
 
 public class Rectangle extends Shape {
-	private static int a;
-	private static int b;
+	private int a;
+	private int b;
 	
 	public Rectangle(int a, int b) {
 		super("사각형");
@@ -15,7 +15,7 @@ public class Rectangle extends Shape {
 		
 	}
 	
-	public static int getA() {
+	public int getA() {
 		return a;
 	}
 	
@@ -23,7 +23,7 @@ public class Rectangle extends Shape {
 		this.a = a;
 	}
 	
-	public static int getB() {
+	public int getB() {
 		return b;
 	}
 	

@@ -1,7 +1,9 @@
 package shape;
 
+import java.io.ObjectInputStream.GetField;
+
 public class Circle extends Shape {
-	private static int r;
+	private int r;
 
 	public Circle(int r) {
 		super("원");
@@ -13,7 +15,7 @@ public class Circle extends Shape {
 		this.setR(r);
 	}
 	
-	public static int getR() {
+	public int getR() {
 		return r;
 	}
 	
