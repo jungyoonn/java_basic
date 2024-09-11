@@ -3,6 +3,7 @@ package student;
 import static student.StudentUtils.*;
 
 import java.util.Arrays;
+
 // Logic
 public class StudentService {
 	private Student[] students = new Student[2];
@@ -16,14 +17,7 @@ public class StudentService {
 	void add() {
 		if(cnt == students.length) {
 			students = Arrays.copyOf(students, cnt*2);
-		} 
-//		students[cnt++] = addInput();
-		
-//		students[cnt].no = StudentUtils.nextInt("추가할 학번"); 
-//		students[cnt].name = StudentUtils.nextLine("추가할 이름"); 
-//		students[cnt].kor = StudentUtils.nextInt("국어 점수"); 
-//		students[cnt].eng = StudentUtils.nextInt("영어 점수"); 
-//		students[cnt++].mat = StudentUtils.nextInt("수학 점수");
+		}
 		
 		int no = 0;
 		String name = null;
@@ -33,42 +27,83 @@ public class StudentService {
 		
 		try {
 			no = nextInt("추가할 학번");
-		} catch (NumberFormatException e) {
-			System.out.println("학번을 입력하지 않으셨습니다. 다시 시도해 주세요.");
-			System.out.println();
-			return;
-		}
-		
-		try {
 			for(Student stu : students) {
 				if(stu.getNo() == no) {
 					System.out.println("학번이 중복입니다. 다시 시도해 주세요.");
 					System.out.println();
 					return;
 				}
+				if(no <= 0) {
+					System.out.println("학번에 음수는 등록할 수 없습니다. 다시 시도해 주세요.");
+					System.out.println();
+					return;
+				}
 			}
-		} catch (NullPointerException e) { }
-		
-//		try {
-//			name = nextLine("추가할 이름");
-//		} catch (NullException e) {
-//			System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
-//			System.out.println();
-//			return;
-//		}
-		try {
-			name = nextLine("추가할 이름");
-			if(name.length() > 4 || name.length() < 2) {
-				throw new NullException((String)name);
-			}
-		} catch(NullException e) {
-			System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+		} catch (NumberFormatException e) {
+			// 학번이 입력되지 않았거나 숫자가 아닐 때
+			System.out.println("학번 입력 오류입니다. 다시 시도해 주세요.");
 			System.out.println();
 			return;
+		} catch (NullPointerException e) {}
+		
+		boolean nameForm = false;
+		while(!nameForm) {
+			name = nextLine("추가할 이름");
+			if(name.length() == 0) {
+				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+				System.out.println();
+				return;
+			}
+			
+			if(name.length() > 4 || name.length() < 2) {
+				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
+				System.out.println();
+				continue;
+			} 
+			for(int j = 0; j < name.length(); j++) {
+				if(name.charAt(j) > '힣' || name.charAt(j) < '가') {
+					System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");
+					System.out.println();
+					break;
+				} else if(j == name.length() - 1) {
+					nameForm = true;
+				}
+			}
 		}
-		kor = nextInt("국어 점수");
-		eng = nextInt("영어 점수");
-		mat = nextInt("수학 점수");
+		
+		boolean scoreForm = false;
+		while(!scoreForm) {
+			try {
+				kor = nextInt("국어 점수");
+			} catch(NumberFormatException e) {
+				System.out.println("점수는 숫자만 입력 가능합니다.");
+				System.out.println();
+				continue;
+			} 
+			scoreForm = overScore(kor);
+		}
+		scoreForm = false;
+		while(!scoreForm) {
+			try {
+				eng = nextInt("영어 점수");
+			} catch(NumberFormatException e) {
+				System.out.println("점수는 숫자만 입력 가능합니다.");
+				System.out.println();
+				continue;
+			} 
+			scoreForm = overScore(eng);
+		}
+		scoreForm = false;
+		while(!scoreForm) {
+			try {
+				mat = nextInt("수학 점수");
+			} catch(NumberFormatException e) {
+				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
+				System.out.println();
+				continue;
+			} 
+			scoreForm = overScore(mat);
+		}
 		
 		students[cnt++] = new Student(no, name, kor, eng, mat);
 	}
@@ -102,17 +137,74 @@ public class StudentService {
 			return;
 		}
 		
-		student.setName(nextLine("수정할 이름"));
-		student.setKor(nextInt("수정할 국어 점수"));
-		student.setEng(nextInt("수정할 영어 점수"));
-		student.setMat(nextInt("수정할 수학 점수"));
+		String name = null;
+		int kor = 0;
+		int eng = 0;
+		int mat = 0;
 		
-//			if(students[i].no == mNo) {
-//				students[i].name = StudentUtils.nextLine("수정할 이름");
-//				students[i].kor = StudentUtils.nextInt("수정할 국어 점수");
-//				students[i].eng = StudentUtils.nextInt("수정할 영어 점수");
-//				students[i].mat = StudentUtils.nextInt("수정할 수학 점수");
-//			
+		boolean nameForm = false;
+		while(!nameForm) {
+			name = nextLine("수정할 이름");
+			if(name.length() == 0) {
+				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+				System.out.println();
+				return;
+			}
+			
+			if(name.length() > 4 || name.length() < 2) {
+				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
+				System.out.println();
+				continue;
+			} 
+			for(int j = 0; j < name.length(); j++) {
+				if(name.charAt(j) > '힣' || name.charAt(j) < '가') {
+					System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");
+					System.out.println();
+					break;
+				} else if(j == name.length() - 1) {
+					nameForm = true;
+				}
+			}
+		}
+		student.setName(name);
+		
+		boolean scoreForm = false;
+		while(!scoreForm) {
+			try {
+				kor = nextInt("수정할 국어 점수");
+			} catch(NumberFormatException e) {
+				System.out.println("점수는 숫자만 입력 가능합니다.");
+				System.out.println();
+				continue;
+			} 
+			scoreForm = overScore(kor);
+		}
+		scoreForm = false;
+		while(!scoreForm) {
+			try {
+				eng = nextInt("수정할 영어 점수");
+			} catch(NumberFormatException e) {
+				System.out.println("점수는 숫자만 입력 가능합니다.");
+				System.out.println();
+				continue;
+			} 
+			scoreForm = overScore(eng);
+		}
+		scoreForm = false;
+		while(!scoreForm) {
+			try {
+				mat = nextInt("수정할 수학 점수");
+			} catch(NumberFormatException e) {
+				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
+				System.out.println();
+				continue;
+			} 
+			scoreForm = overScore(mat);
+		}
+		
+		student.setKor(kor);
+		student.setEng(eng);
+		student.setMat(mat);
 	}
 	
 	void remove() {
@@ -149,6 +241,19 @@ public class StudentService {
 		}
 		
 		return student;
+	}
+	
+	private boolean overScore(int score) {
+		try {
+			if (score > 100 || score < 0) {
+				throw new RangeException(0, 100);
+			}
+		} catch (RangeException e) { 
+			System.out.println("0과 100 이하의 점수만 입력 가능합니다.");
+			System.out.println();
+			return false;
+		}
+		return true;
 	}
 	
 	

@@ -1,6 +1,6 @@
 package student;
 
-public class NullException extends RuntimeException {
+public class NullException extends RuntimeException { // 안 쓰는 클래스
 	Object obj;
 
 	public NullException(Object obj) {
