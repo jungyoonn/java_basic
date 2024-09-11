@@ -19,5 +19,9 @@ public class StudentTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		Student s5 = s1;
+		System.out.println(s1 == s5);
+		System.out.println(s1.equals(s5));
 	}
 }

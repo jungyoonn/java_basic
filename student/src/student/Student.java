@@ -25,6 +25,7 @@ public class Student implements Cloneable {
 		kor = s.kor;
 		eng = s.eng;
 		mat = s.mat;
+		if(s.arr != null)
 		arr = s.arr.clone();
 	}
 	
@@ -100,10 +101,20 @@ public class Student implements Cloneable {
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		Student obj = null;
-//		obj = (Student)super.clone(); // 얕은 복사
-//		obj.arr = arr.clone(); // 깊은 복사
+		
+		obj = (Student)super.clone(); // 얕은 복사
+		if(obj.arr != null)
+		obj.arr = arr.clone(); // 깊은 복사
 		
 		return super.clone();
 	}
 	
+	// 이퀄스 연습용
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || !(obj instanceof Student)) return false; //널 체크와 타입 체크
+		Student s = (Student)obj;
+		
+		return no == s.no && name.equals(s.name); // 메서드 이름인 이퀄스랑 다름
+	}
 }
