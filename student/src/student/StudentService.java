@@ -25,11 +25,51 @@ public class StudentService {
 //		students[cnt].eng = StudentUtils.nextInt("영어 점수"); 
 //		students[cnt++].mat = StudentUtils.nextInt("수학 점수");
 		
-		int no = nextInt("추가할 학번");
-		String name = nextLine("추가할 이름");
-		int kor = nextInt("국어 점수");
-		int eng = nextInt("영어 점수");
-		int mat = nextInt("수학 점수");
+		int no = 0;
+		String name = null;
+		int kor = 0;
+		int eng = 0;
+		int mat = 0;
+		
+		try {
+			no = nextInt("추가할 학번");
+		} catch (NumberFormatException e) {
+			System.out.println("학번을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+			System.out.println();
+			return;
+		}
+		
+		try {
+			for(Student stu : students) {
+				if(stu.getNo() == no) {
+					System.out.println("학번이 중복입니다. 다시 시도해 주세요.");
+					System.out.println();
+					return;
+				}
+			}
+		} catch (NullPointerException e) { }
+		
+//		try {
+//			name = nextLine("추가할 이름");
+//		} catch (NullException e) {
+//			System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+//			System.out.println();
+//			return;
+//		}
+		try {
+			name = nextLine("추가할 이름");
+			if(name.length() > 4 || name.length() < 2) {
+				throw new NullException((String)name);
+			}
+		} catch(NullException e) {
+			System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+			System.out.println();
+			return;
+		}
+		kor = nextInt("국어 점수");
+		eng = nextInt("영어 점수");
+		mat = nextInt("수학 점수");
+		
 		students[cnt++] = new Student(no, name, kor, eng, mat);
 	}
 	
