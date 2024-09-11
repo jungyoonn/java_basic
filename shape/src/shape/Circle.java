@@ -1,7 +1,5 @@
 package shape;
 
-import java.io.ObjectInputStream.GetField;
-
 public class Circle extends Shape {
 	private int r;
 
