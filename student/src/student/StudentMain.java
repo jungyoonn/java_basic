@@ -27,14 +27,17 @@ public class StudentMain {
 				}
 				case 2: {
 					ss.add();
+					ss.cloneAndSort();
 					break;
 				}
 				case 3: {
 					ss.modify();
+					ss.cloneAndSort();
 					break;
 				}
 				case 4: {
 					ss.remove();
+					ss.cloneAndSort();
 					break;
 				}
 				case 5: {

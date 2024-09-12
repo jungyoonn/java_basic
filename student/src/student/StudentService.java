@@ -7,11 +7,16 @@ import java.util.Arrays;
 // Logic
 public class StudentService {
 	private Student[] students = new Student[2];
+	// 원본 배열에 추가 혹은 수정이 일어났을 때 초기화
+	private Student[] totalSortStudents;
+	private Student[] noSortStudents;
+	private Student[] nameSortStudents;
 	private int cnt;
 	
 	{
 		students[cnt++] = new Student(1, "새똥이", 80, 90, 100);
 		students[cnt++] = new Student(2, "개똥이", 77, 66, 77);
+		cloneAndSort();
 	}
 	
 	void add() {
@@ -110,6 +115,25 @@ public class StudentService {
 	}
 	
 	void list() {
+		int input = checkRange(nextInt("1. 입력순 2. 학번순 3. 이름순 4. 석차순"), 1, 4);
+		Student[] tmp = null;
+		switch (input) {
+		case 1:
+			tmp = students;
+			break;
+		case 2:
+			tmp = noSortStudents;
+			break;
+		case 3:
+			tmp = nameSortStudents;
+			break;
+		case 4:
+			tmp = totalSortStudents;
+			break;
+		default:
+			break;
+		}
+		
 		System.out.println("학번     이름     국어   영어   수학    총점   평균");
 		System.out.println("==================================================");
 		
@@ -125,7 +149,8 @@ public class StudentService {
 //								students[i].avg()
 //								
 //					);
-			System.out.println(students[i]);
+//			System.out.println(students[i]);
+			System.out.println(tmp[i]);
 		}
 		System.out.println();
 	}
@@ -257,6 +282,42 @@ public class StudentService {
 		return true;
 	}
 	
+	//정렬
+	void cloneAndSort() {
+		totalSortStudents = students.clone();
+		noSortStudents = students.clone();
+		nameSortStudents = students.clone();
+		
+		sort(0, noSortStudents);
+		sort(1, nameSortStudents);
+		sort(2, totalSortStudents);
+	}
+	void sort(int type, Student[] target) {
+		Student[] arr = target;
+		
+		for(int i = 0; i < cnt-1; i++) {
+			for(int j = 0; j < cnt-1; j++) {
+				boolean condition = false;
+				switch(type) {
+				case 0:
+					condition = arr[j].getNo() > arr[j+1].getNo();
+					break;
+				case 1:
+					condition = arr[j].getName().compareTo(arr[j+1].getName()) > 0;
+					break;
+				case 2: 
+					condition = arr[j].total() < arr[j+1].total();
+					break;
+				}
+				if(condition) {
+					Student tmp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = tmp;
+				}
+			}
+		}
+//		System.out.println(Arrays.toString(arr));
+	}
 	
 	// 오버로딩으로 점수 유효성 검증
 	int checkRange(int num, int start, int end) throws RangeException{
