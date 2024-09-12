@@ -29,9 +29,10 @@ public class StudentService {
 			no = nextInt("추가할 학번");
 			for(Student stu : students) {
 				if(stu.getNo() == no) {
-					System.out.println("학번이 중복입니다. 다시 시도해 주세요.");
-					System.out.println();
-					return;
+					throw new RuntimeException("학번이 중복입니다. 다시 시도해 주세요.");
+//					System.out.println("학번이 중복입니다. 다시 시도해 주세요.");
+//					System.out.println();
+//					return;
 				}
 				if(no <= 0) {
 					System.out.println("학번에 음수는 등록할 수 없습니다. 다시 시도해 주세요.");
@@ -254,6 +255,18 @@ public class StudentService {
 			return false;
 		}
 		return true;
+	}
+	
+	
+	// 오버로딩으로 점수 유효성 검증
+	int checkRange(int num, int start, int end) throws RangeException{
+		if(num < start || num > end) {
+			throw new RangeException(start, end);
+		}
+		return num;
+	}
+	int checkRange(int num) throws RangeException {
+		return checkRange(num, 0, 100);
 	}
 	
 	
