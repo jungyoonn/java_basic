@@ -36,6 +36,7 @@ public class GameService {
 	
 	public void play() {
 		for (int i = 0; ; i++) {
+			printMap();
 			int seq = i%players.length;
 			Player p = players[seq];
 			System.out.println();
@@ -55,7 +56,8 @@ public class GameService {
 				p.money += 300_000;
 			}
 			p.idx = tmpPos % 32;
-			System.out.println(locals[p.idx]);
+			System.out.println(p.name + " 님이 " + locals[p.idx] + "(으)로 떠납니다!");
+			System.out.println();
 		}
 	}
 	
