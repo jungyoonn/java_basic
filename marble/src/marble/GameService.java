@@ -16,6 +16,15 @@ public class GameService {
 		players[idx++] = new Player("소똥이");
 	}
 	
+	public void printMap() {
+		for(int i = 0; i < locals.length; i++) {
+			System.out.printf("%-10s", locals[i]);
+			if(i % 8 == 7) {
+				System.out.println();
+			}
+		}
+	}
+	
 	public void play() {
 		for (int i = 0; ; i++) {
 			int seq = i%players.length;
@@ -42,7 +51,7 @@ public class GameService {
 	}
 	
 	public void init() {
-		String names = "시작 > 방콕 > 보너스게임(동전던지기) > 베이징 > 포츈카드 > 독도 > 두바이 > 카이로 > 무인도 > 발리 > 도쿄 > 시드니 > 포츈카드 > 퀘백 > 하와이 > 상파울루 > 올림픽 > 프라하 > 푸켓 > 베를린 > 포츈카드 > 모스크바 > 제네바 > 로마 > 세계여행 > 타히티 > 런던 > 파리 > 포츈카드 > 뉴욕 > 국세청 > 서울";
+		String names = "시작 > 방콕 > 동전던지기 > 베이징 > 포츈카드 > 독도 > 두바이 > 카이로 > 무인도 > 발리 > 도쿄 > 시드니 > 포츈카드 > 퀘백 > 하와이 > 상파울루 > 올림픽 > 프라하 > 푸켓 > 베를린 > 포츈카드 > 모스크바 > 제네바 > 로마 > 세계여행 > 타히티 > 런던 > 파리 > 포츈카드 > 뉴욕 > 국세청 > 서울";
 		String[] ns = names.split(" > ");
 		int cnt = 0;
 		locals[cnt] = new NonSaleLocal(0, ns[cnt], cnt++);
