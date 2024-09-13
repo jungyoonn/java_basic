@@ -1,5 +1,7 @@
 package marble;
 
+import java.util.Arrays;
+
 import marble.area.City;
 import marble.area.Local;
 import marble.area.NonSaleLocal;
@@ -17,8 +19,15 @@ public class GameService {
 	}
 	
 	public void printMap() {
+		String[] icons = {"★", "○", "●"};
+		String[] playerPos = new String[32];
+		Arrays.fill(playerPos, "");
+		for(int i = 0; i < players.length; i++) {
+			playerPos[players[i].idx] += icons[i];
+		}
+		
 		for(int i = 0; i < locals.length; i++) {
-			System.out.printf("%-10s", locals[i]);
+			System.out.printf("%-10s", locals[i] + playerPos[i]);
 			if(i % 8 == 7) {
 				System.out.println();
 			}
@@ -46,7 +55,7 @@ public class GameService {
 				p.money += 300_000;
 			}
 			p.idx = tmpPos % 32;
-			System.out.println(p);
+			System.out.println(locals[p.idx]);
 		}
 	}
 	
