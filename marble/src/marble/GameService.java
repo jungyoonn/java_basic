@@ -39,23 +39,38 @@ public class GameService {
 			printMap();
 			int seq = i%players.length;
 			Player p = players[seq];
+			
 			System.out.println();
 			System.out.println("===============================================");
 			CommomUtils.nextLine(p.name + "의 차례입니다. 엔터를 누르면 주사위를 굴립니다."); // 턴을 번갈아 가면서 순환
 			
-			int dice1 = (int)(Math.random() * 6) + 1;
-			int dice2 = (int)(Math.random() * 6) + 1;
-			
-			System.out.println("======= 주사위의 눈은 " + dice1 + ", " + dice2 + "입니다");
-			
-			int tmpPos = p.idx + dice1 + dice2;
-			
-			
-			if(tmpPos > 31) {
-				System.out.println("시작점 통과! 보너스 지급 [30만 원]");
-				p.money += 300_000;
+			for(int j = 0; j < 3; j++) {
+				int dice1 = (int)(Math.random() * 6) + 1;
+				int dice2 = (int)(Math.random() * 6) + 1;
+				
+				System.out.println("======= 주사위의 눈은 " + dice1 + ", " + dice2 + "입니다");
+				int tmpPos = p.idx + dice1 + dice2;
+
+				// 3연속 더블이면 무인도
+				if(j == 2) {
+					System.out.println("세 번 연속 더블입니다 무인도로 이동합니다");
+					p.idx = 8;
+					break;
+				}
+				
+				if(tmpPos > 31) {
+					System.out.println("시작점 통과! 보너스 지급 [30만 원]");
+					p.money += 300_000;
+				}
+				p.idx = tmpPos % 32;
+				
+				// 더블이 아니면 다음 턴으로
+				if(dice1 != dice2) {
+					break;
+				}
+				
+				CommomUtils.nextLine("더블입니다! 주사위를 한 번 더 굴립니다.");
 			}
-			p.idx = tmpPos % 32;
 			System.out.println(p.name + " 님이 " + locals[p.idx] + "(으)로 떠납니다!");
 			System.out.println();
 		}
