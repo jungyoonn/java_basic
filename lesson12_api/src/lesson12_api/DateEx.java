@@ -13,5 +13,8 @@ public class DateEx {
 		
 		long target = date.getTime() + 3000L * 24 * 60 * 60 * 1000; // epoch 타임
 		System.out.println(new Date(target)); // epoch 타임을 넣는 메서드
+		
+		Date christmas = new Date(123, 11, 25, 0, 0, 0); // 연도 기준이 1990년
+		System.out.println(christmas);
 	}
 }
