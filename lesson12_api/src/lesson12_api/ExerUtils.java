@@ -23,7 +23,7 @@ static Scanner scan = new Scanner(System.in);
 		System.out.println("\t" + year + "년 " + month + "월");
 		System.out.println("  일  월  화  수  목  금  토");
 		int cnt = startDay;
-
+//		startDay -= 1;
 		for(int i = 2 - startDay; i <= lastDay; i++, cnt++) {
 			if (i <= 0) {
 				System.out.printf("%-4c", ' ');
@@ -31,8 +31,12 @@ static Scanner scan = new Scanner(System.in);
 				System.out.printf("%4d", i);
 				if (i % 7 == 7 - startDay) {
 					System.out.println();
+					if(cnt == 7) {
+						System.out.println();
+					}
 				}
 			}
+			
 		}
 		System.out.println(); 
 		System.out.println();

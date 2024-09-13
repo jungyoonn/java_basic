@@ -62,6 +62,7 @@ public class Exer {
 				System.out.println("============================");
 				
 				ExerUtils.calPrint(nowYear, nowMonth - 1, startDay, lastDay);
+				searchCal = Calendar.getInstance();
 				break;
 			}
 			case 2: {
@@ -74,6 +75,7 @@ public class Exer {
 				System.out.println("============================");
 				
 				ExerUtils.calPrint(nowYear, nowMonth + 1, startDay, lastDay);
+				searchCal = Calendar.getInstance();
 				break;
 			}
 			case 3: {
@@ -86,6 +88,7 @@ public class Exer {
 				System.out.println("============================");
 				
 				ExerUtils.calPrint(nowYear - 1, nowMonth, startDay, lastDay);
+				searchCal = Calendar.getInstance();
 				break;
 			}
 			case 4:{
@@ -98,6 +101,7 @@ public class Exer {
 				System.out.println("============================");
 				
 				ExerUtils.calPrint(nowYear + 1, nowMonth, startDay, lastDay);
+				searchCal = Calendar.getInstance();
 				break;
 			}
 			case 5: //{
