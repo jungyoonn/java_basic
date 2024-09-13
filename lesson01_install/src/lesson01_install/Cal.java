@@ -17,12 +17,12 @@ public class Cal {
 		System.out.println(startDay);
 		
 		System.out.println("\t" + date.getMonth().getValue() + "월");
-		System.out.println("일  월  화  수  목  금  토");
+		System.out.println("  일  월  화  수  목  금  토");
 		for(int i = 1- startDay; i <= lastDay; i++) {
 			if (i <= 0) {
-				System.out.printf("%3c", ' ');
+				System.out.printf("%-4c", ' ');
 			} else {
-				System.out.printf("%3d", i);
+				System.out.printf("%4d", i);
 				if (i % 7 == 7 - startDay) {
 					System.out.println();
 				}
