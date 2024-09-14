@@ -26,7 +26,8 @@ public class StringEx {
 		
 		System.out.println(str.toUpperCase());
 		
-		String s = "     [안녕하세요]      ";
+		String s = "     [안녕하세요] "
+				+ "     ";
 		// 공백 제거
 		System.out.println(s.trim());
 		System.out.println(s.trim().replaceAll(" ", ""));
