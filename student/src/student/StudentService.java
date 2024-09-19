@@ -2,28 +2,26 @@ package student;
 
 import static student.StudentUtils.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 // Logic
 public class StudentService {
-	private Student[] students = new Student[2];
+	private List<Student> students = new ArrayList<Student>();
 	// 원본 배열에 추가 혹은 수정이 일어났을 때 초기화
-	private Student[] totalSortStudents;
-	private Student[] noSortStudents;
-	private Student[] nameSortStudents;
-	private int cnt;
+	private List<Student> totalSortStudents;
+	private List<Student> noSortStudents;
+	private List<Student> nameSortStudents;
 	
 	{
-		students[cnt++] = new Student(1, "새똥이", 80, 90, 100);
-		students[cnt++] = new Student(2, "개똥이", 77, 66, 77);
+		students.add(new Student(1, "새똥이", 80, 90, 100));
+		students.add(new Student(2, "개똥이", 77, 66, 77));
+		students.add(new Student(3, "소똥이", 64, 34, 66));
+		students.add(new Student(4, "말똥이", 99, 99, 99));
 		cloneAndSort();
 	}
 	
 	void add() {
-		if(cnt == students.length) {
-			students = Arrays.copyOf(students, cnt*2);
-		}
-		
 		int no = 0;
 		String name = null;
 		int kor = 0;
@@ -35,9 +33,6 @@ public class StudentService {
 			for(Student stu : students) {
 				if(stu.getNo() == no) {
 					throw new RuntimeException("학번이 중복입니다. 다시 시도해 주세요.");
-//					System.out.println("학번이 중복입니다. 다시 시도해 주세요.");
-//					System.out.println();
-//					return;
 				}
 				if(no <= 0) {
 					System.out.println("학번에 음수는 등록할 수 없습니다. 다시 시도해 주세요.");
@@ -111,12 +106,12 @@ public class StudentService {
 			scoreForm = overScore(mat);
 		}
 		
-		students[cnt++] = new Student(no, name, kor, eng, mat);
+		students.add(new Student(no, name, kor, eng, mat));
 	}
 	
 	void list() {
 		int input = checkRange(nextInt("1. 입력순 2. 학번순 3. 이름순 4. 석차순"), 1, 4);
-		Student[] tmp = null;
+		List<Student> tmp = null;
 		switch (input) {
 		case 1:
 			tmp = students;
@@ -137,20 +132,8 @@ public class StudentService {
 		System.out.println("학번     이름     국어   영어   수학    총점   평균");
 		System.out.println("==================================================");
 		
-		for(int i = 0; i < cnt; i++) {
-			if(students[i].getNo() == -1) continue;
-//			System.out.printf("%4d %6s %5d %5d %6d %6d %7.2f\n", 
-//								students[i].no,
-//								students[i].name,
-//								students[i].kor,
-//								students[i].eng,
-//								students[i].mat,
-//								students[i].total(),
-//								students[i].avg()
-//								
-//					);
-//			System.out.println(students[i]);
-			System.out.println(tmp[i]);
+		for(int i = 0; i < students.size(); i++) {
+			System.out.println(tmp.get(i));
 		}
 		System.out.println();
 	}
@@ -240,11 +223,17 @@ public class StudentService {
 			return;
 		}
 		
-		for(int i = 0; i < cnt; i++) {
-			if(students[i] == student) {
-				System.arraycopy(students, i+1, students, i, cnt-- -i - 1);
+		for(int i = 0; i < students.size(); i++) {
+			if(students.get(i) == student ) {
+				students.remove(i);
 			}
 		}
+		
+//		for(int i = 0; i < cnt; i++) {
+//			if(students[i] == student) {
+//				System.arraycopy(students, i+1, students, i, cnt-- -i - 1);
+//			}
+//		} i번째를 삭제하고 다음 인덱스부터 밀기
 		
 //		String yn = nextLine(student.name + " 학생의 정보를 삭제하시겠습니까?");
 //		if(yn.equals("y")) {
@@ -260,9 +249,9 @@ public class StudentService {
 		Student student = null;
 		int no = nextInt("학생의 학번 입력 > ");
 		
-		for(int i = 0; i < cnt; i++) {
-			if(no == students[i].getNo()) {
-				student = students[i];
+		for(int i = 0; i < students.size(); i++) {
+			if(students.get(i).getNo() == no) {
+				student = students.get(i);
 			}
 		}
 		
@@ -282,41 +271,17 @@ public class StudentService {
 		return true;
 	}
 	
-	//정렬
-	void cloneAndSort() {
-		totalSortStudents = students.clone();
-		noSortStudents = students.clone();
-		nameSortStudents = students.clone();
-		
-		sort(0, noSortStudents);
-		sort(1, nameSortStudents);
-		sort(2, totalSortStudents);
-	}
-	void sort(int type, Student[] target) {
-		Student[] arr = target;
-		
-		for(int i = 0; i < cnt-1; i++) {
-			for(int j = 0; j < cnt-1; j++) {
-				boolean condition = false;
-				switch(type) {
-				case 0:
-					condition = arr[j].getNo() > arr[j+1].getNo();
-					break;
-				case 1:
-					condition = arr[j].getName().compareTo(arr[j+1].getName()) > 0;
-					break;
-				case 2: 
-					condition = arr[j].total() < arr[j+1].total();
-					break;
-				}
-				if(condition) {
-					Student tmp = arr[j];
-					arr[j] = arr[j+1];
-					arr[j+1] = tmp;
-				}
-			}
+	void sort(int type, List<Student> stu) {
+		if(type == 0) {
+			noSortStudents = new ArrayList<Student>(students);
+			noSortStudents.sort((o1, o2) -> o2.getNo() - o1.getNo());
+		} else if (type == 1) {
+			nameSortStudents =  new ArrayList<Student>(students);
+			nameSortStudents.sort((o1, o2) -> o1.getName().hashCode() - o2.getName().hashCode());
+		} else if (type == 2) {
+			totalSortStudents = new ArrayList<Student>(students);
+			totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
 		}
-//		System.out.println(Arrays.toString(arr));
 	}
 	
 	// 오버로딩으로 점수 유효성 검증
@@ -337,15 +302,9 @@ public class StudentService {
 		Student student = null;
 		int mNo = nextInt("수정할 학생의 학번 입력");
 		int i;
-		for(i = 0; i < cnt; i++) {
-//			if(students[i].no == mNo) {
-//				students[i].name = StudentUtils.nextLine("수정할 이름");
-//				students[i].kor = StudentUtils.nextInt("수정할 국어 점수");
-//				students[i].eng = StudentUtils.nextInt("수정할 영어 점수");
-//				students[i].mat = StudentUtils.nextInt("수정할 수학 점수");
-//			}
-			if(students[i].getNo() == mNo) {
-				student = students[i];
+		for(i = 0; i < students.size(); i++) {
+			if(students.get(i).getNo() == mNo) {
+				student = students.get(i);
 				break;
 			}
 		}
@@ -354,11 +313,11 @@ public class StudentService {
 	void remove2() {
 		int rNo = nextInt("삭제할 학생의 학번 입력");
 		
-		for(int i = 0; i < cnt; i++) {
-			if(students[i].getNo() == rNo) {
-				String yn = nextLine(students[i].getName() +" 학생을 삭제하시겠습니까? (y/n)");
+		for(int i = 0; i < students.size(); i++) {
+			if(students.get(i).getNo() == rNo) {
+				String yn = nextLine(students.get(i).getName() +" 학생을 삭제하시겠습니까? (y/n)");
 				if(yn.equals("y")) {
-				students[i].setNo(-1);	
+				students.get(i).setNo(-1);	
 				System.out.println("삭제를 완료했습니다.");
 				System.out.println();
 				} else if(yn.equals("n")) {
@@ -371,5 +330,16 @@ public class StudentService {
 				}
 			}
 		}
+	}
+	
+	//정렬
+	void cloneAndSort() {
+		totalSortStudents = new ArrayList<Student>(students);
+		noSortStudents = new ArrayList<Student>(students);
+		nameSortStudents =  new ArrayList<Student>(students);
+		
+		sort(0, noSortStudents);
+		sort(1, nameSortStudents);
+		sort(2, totalSortStudents);
 	}
 }
