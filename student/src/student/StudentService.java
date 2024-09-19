@@ -223,10 +223,8 @@ public class StudentService {
 			return;
 		}
 		
-		for(int i = 0; i < students.size(); i++) {
-			if(students.get(i) == student ) {
-				students.remove(i);
-			}
+		if(students.contains(student)) {
+			students.remove(student);
 		}
 		
 //		for(int i = 0; i < cnt; i++) {
