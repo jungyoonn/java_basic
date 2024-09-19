@@ -20,7 +20,7 @@ public class SetEx2 {
 	}
 }
 
-class Member {
+class Member implements Comparable{
 	String name;
 	int age;
 	public Member(String name, int age) {
@@ -43,6 +43,12 @@ class Member {
 		return name.equals(member.name) && age == member.age;
 	}
 
+	@Override
+	public int compareTo(Object o) {
+		Member m = (Member)o;
+		return -name.compareTo(m.name);
+	}
+	
 	@Override
 	public String toString() {
 		return "Member [name=" + name + ", age=" + age + "]";
