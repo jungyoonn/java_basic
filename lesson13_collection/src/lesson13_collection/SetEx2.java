@@ -30,7 +30,7 @@ class Member {
 	
 	@Override
 	public int hashCode() {
-		
+		// return Objects.hash(name, age); 얘를 추천
 		return name.hashCode() + age;
 	}
 
