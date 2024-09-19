@@ -226,20 +226,6 @@ public class StudentService {
 		if(students.contains(student)) {
 			students.remove(student);
 		}
-		
-//		for(int i = 0; i < cnt; i++) {
-//			if(students[i] == student) {
-//				System.arraycopy(students, i+1, students, i, cnt-- -i - 1);
-//			}
-//		} i번째를 삭제하고 다음 인덱스부터 밀기
-		
-//		String yn = nextLine(student.name + " 학생의 정보를 삭제하시겠습니까?");
-//		if(yn.equals("y")) {
-//			student.no = -1;
-//			System.out.println("삭제를 완료했습니다.");
-//		} else {
-//			System.out.println("삭제를 취소합니다. 초기 화면으로 돌아갑니다.");
-//		}
 	}
 	
 	// 중복된 기능 분리
@@ -269,19 +255,6 @@ public class StudentService {
 		return true;
 	}
 	
-	void sort(int type, List<Student> stu) {
-		if(type == 0) {
-			noSortStudents = new ArrayList<Student>(students);
-			noSortStudents.sort((o1, o2) -> o2.getNo() - o1.getNo());
-		} else if (type == 1) {
-			nameSortStudents =  new ArrayList<Student>(students);
-			nameSortStudents.sort((o1, o2) -> o1.getName().hashCode() - o2.getName().hashCode());
-		} else if (type == 2) {
-			totalSortStudents = new ArrayList<Student>(students);
-			totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
-		}
-	}
-	
 	// 오버로딩으로 점수 유효성 검증
 	int checkRange(int num, int start, int end) throws RangeException{
 		if(num < start || num > end) {
@@ -293,6 +266,16 @@ public class StudentService {
 		return checkRange(num, 0, 100);
 	}
 	
+	//정렬
+	void cloneAndSort() {
+		totalSortStudents = new ArrayList<Student>(students);
+		noSortStudents = new ArrayList<Student>(students);
+		nameSortStudents =  new ArrayList<Student>(students);
+		
+		noSortStudents.sort((o1, o2) -> o2.getNo() - o1.getNo());
+		nameSortStudents.sort((o1, o2) -> o1.getName().hashCode() - o2.getName().hashCode());
+		totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
+	}
 	
 	
 	
@@ -328,16 +311,25 @@ public class StudentService {
 				}
 			}
 		}
+		
+//		for(int i = 0; i < cnt; i++) {
+//		if(students[i] == student) {
+//			System.arraycopy(students, i+1, students, i, cnt-- -i - 1);
+//		}
+//	} i번째를 삭제하고 다음 인덱스부터 밀기
 	}
 	
-	//정렬
-	void cloneAndSort() {
-		totalSortStudents = new ArrayList<Student>(students);
-		noSortStudents = new ArrayList<Student>(students);
-		nameSortStudents =  new ArrayList<Student>(students);
-		
-		sort(0, noSortStudents);
-		sort(1, nameSortStudents);
-		sort(2, totalSortStudents);
-	}
+	
+//	void sort(int type, List<Student> stu) {
+//		if(type == 0) {
+//			noSortStudents = new ArrayList<Student>(students);
+//			noSortStudents.sort((o1, o2) -> o2.getNo() - o1.getNo());
+//		} else if (type == 1) {
+//			nameSortStudents =  new ArrayList<Student>(students);
+//			nameSortStudents.sort((o1, o2) -> o1.getName().hashCode() - o2.getName().hashCode());
+//		} else if (type == 2) {
+//			totalSortStudents = new ArrayList<Student>(students);
+//			totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
+//		}
+//	}
 }

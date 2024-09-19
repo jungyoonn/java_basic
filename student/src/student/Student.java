@@ -1,6 +1,6 @@
 package student;
 
-public class Student implements Cloneable, Comparable {
+public class Student implements Cloneable {
 	private int no;
 	private String name;
 	private int kor;
@@ -89,12 +89,6 @@ public class Student implements Cloneable, Comparable {
 	@Override
 	public String toString() {
 		return String.format("%4d %6s %5d %5d %6d %6d %7.2f", no, name, kor, eng, mat, total(), avg());
-	}
-	
-	@Override
-	public int compareTo(Object o) {
-		Student m = (Student)o;
-		return -name.compareTo(m.name);
 	}
 	
 	void update() {
