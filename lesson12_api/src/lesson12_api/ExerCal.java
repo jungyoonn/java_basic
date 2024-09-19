@@ -61,6 +61,9 @@ public class ExerCal {
 				
 				searchCal.set(searchYear, searchMonth - 1, 1);
 				ExerUtils.calPrint(searchCal);
+				
+//				String str = ExerUtils.nextLine("연월 입력 ex) 2024/09 :: ");
+//				cal.setTime(new SimpleDateFormat("yyyy/MM").parse(str));
 				break;
 			}
 			case 6: {
