@@ -5,6 +5,7 @@ import static student.StudentUtils.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 // Logic
 public class StudentService {
@@ -120,25 +121,30 @@ public class StudentService {
 		int eng = 0;
 		int mat = 0;
 		
-		name = next("수정할 이름", String.class, (t) -> {
-			if(t.length() == 0) {
-				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
-				return false;
-			}
-			if(t.length() > 4 || t.length() < 2) {
-				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
-				return false;
-			}
-			
-			for(int j = 0; j < t.length(); j++) {
-				if(t.charAt(j) > '힣' || t.charAt(j) < '가') {
-					System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요. 다시 시도해 주세요.");
-					return false;
-				}
-			}
-			return true;
-			}
-				, "");
+//		name = next("수정할 이름", String.class, (t) -> {
+//			if(t.length() == 0) {
+//				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+//				return false;
+//			}
+//			if(t.length() > 4 || t.length() < 2) {
+//				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
+//				return false;
+//			}
+//			
+//			for(int j = 0; j < t.length(); j++) {
+//				if(t.charAt(j) > '힣' || t.charAt(j) < '가') {
+//					System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요. 다시 시도해 주세요.");
+//					return false;
+//				}
+//			}
+//			return true;
+//			}
+//				, "");
+		
+		name = next("수정할 이름", String.class, (t) -> validation("이름을 입력하지 않으셨습니다.", t.length() == 0, t)	
+														&& validation("이름의 길이가 맞지 않습니다.", t.length() > 4 || t.length() < 2, t)
+														&& validation("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.", t.matches("^[가-힣]$") ,t)
+														, "");
 		
 		student.setName(name);
 		
@@ -181,6 +187,15 @@ public class StudentService {
 		}
 		
 		return student;
+	}
+	
+	boolean validation (String msg, boolean b, String str) {
+		System.out.println(str.matches("^[가-힣]$"));
+		if(b) {
+			System.out.println(msg);
+			return false;
+		}
+		return true;
 	}
 	
 	//정렬
