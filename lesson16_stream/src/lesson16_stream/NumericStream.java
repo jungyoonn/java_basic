@@ -18,5 +18,8 @@ public class NumericStream {
 		
 		LongStream ls = new Random().longs(6, 1, 46); // 1부터 45까지 6개 .sorted() 붙이면 정렬도 해 줌
 		ls.forEach(System.out::println);
+		
+		is = "가나다라ABCD".chars();
+		is.forEach(s -> System.out.println((char)s));
 	}
 }
