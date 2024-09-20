@@ -133,7 +133,7 @@ public class StudentService {
 				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
 				return false;
 			}
-			if(t.matches("^[가-힣]{2,4}")) {
+			if(t.length() > 4 || t.length() < 2) {
 				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
 				return false;
 			}
