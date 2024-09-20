@@ -3,6 +3,7 @@ package student;
 import static student.StudentUtils.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 // Logic
@@ -223,7 +224,7 @@ public class StudentService {
 			return;
 		}
 		
-		if(students.contains(student)) {
+		if(students.contains(student)) { // 위에서 조건문을 처리했기 때문에 if문 굳이 필요 x
 			students.remove(student);
 		}
 	}
@@ -275,6 +276,13 @@ public class StudentService {
 		noSortStudents.sort((o1, o2) -> o2.getNo() - o1.getNo());
 		nameSortStudents.sort((o1, o2) -> o1.getName().hashCode() - o2.getName().hashCode());
 		totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
+		
+		
+//		nameSortStudents.sort(new Comparator<Student>() {
+//			public int compare(Student o1, Student o2) {
+//				return o1.getName().compareTo(o2.getName());
+//			}
+//		}); 람다식 대신 Comparator를 이용한 방법도 있다
 	}
 	
 	
