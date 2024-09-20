@@ -1,5 +1,7 @@
 package student;
 
+import static student.StudentUtils.next;
+
 public class StudentMain {
 	public static void main(String[] args) {
 		// UI
@@ -11,11 +13,14 @@ public class StudentMain {
 			try {
 				int input = 0;
 				try {
-					input = StudentUtils.nextInt("1. 조회  2. 등록  3. 수정  4. 삭제  5. 종료");
-					if(input <= 0 || input > 5) {
-						System.out.println("입력 오류! 1에서 5까지의 숫자만 입력해 주세요.");
-						System.out.println();
-					}
+//					input = StudentUtils.nextInt("1. 조회  2. 등록  3. 수정  4. 삭제  5. 종료");
+					input = next("1. 조회  2. 등록  3. 수정  4. 삭제  5. 종료"
+							, Integer.class, t -> t > 0 && t < 6
+							, "입력 오류! 1에서 5까지의 숫자만 입력해 주세요.");
+//					if(input <= 0 || input > 5) {
+//						System.out.println("입력 오류! 1에서 5까지의 숫자만 입력해 주세요.");
+//						System.out.println();
+//					}
 				} catch(NumberFormatException e) {
 					System.out.println("숫자를 입력하세요.");
 					System.out.println();
