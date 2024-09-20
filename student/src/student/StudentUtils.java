@@ -45,7 +45,7 @@ public class StudentUtils {
 					throw new IllegalArgumentException(errMsg);
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("올바른 숫자를 입력하세요");
+				System.out.println("올바른 숫자를 입력하세요.");
 			} catch (IllegalArgumentException iae) {
 				System.out.println(iae.getMessage());
 			} 

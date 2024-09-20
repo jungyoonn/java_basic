@@ -28,118 +28,72 @@ public class StudentService {
 		int kor = 0;
 		int eng = 0;
 		int mat = 0;
+			
+		no = next("추가할 학번", Integer.class, t -> t > 0
+				, "학번에 음수는 등록할 수 없습니다. 다시 시도해 주세요.");
+		for(Student stu : students) {
+			if(stu.getNo() == no) {
+				throw new RuntimeException("학번이 중복입니다. 다시 시도해 주세요.");
+			}
+		}
 		
-//		int i = StudentUtils.next("숫자", Integer.class,t -> t < 0 , "0보다 큰값");
-//		System.out.println(i);
+		name = next("추가할 이름", String.class, (t) -> {
+			if(t.length() == 0) {
+				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+				return false;
+			}
+			if(t.length() > 4 || t.length() < 2) {
+				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
+				return false;
+			}
+			
+			for(int j = 0; j < t.length(); j++) {
+				if(t.charAt(j) > '힣' || t.charAt(j) < '가') {
+					System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요. 다시 시도해 주세요.");
+					return false;
+				}
+			}
+			return true;
+			}
+				, "");
+		
+		for(int j = 0; j < name.length(); j++) {
+			if(name.charAt(j) > '힣' || name.charAt(j) < '가') {
+				System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");
+				System.out.println();
+				break;
+			} else if(j == name.length() - 1) {
+			}
+		}
 		
 		try {
-//			no = nextInt("추가할 학번");
-			no = next("추가할 학번", Integer.class, t -> t > 0
-					, "학번에 음수는 등록할 수 없습니다. 다시 시도해 주세요.");
-			for(Student stu : students) {
-				if(stu.getNo() == no) {
-					throw new RuntimeException("학번이 중복입니다. 다시 시도해 주세요.");
-				}
-//				if(no <= 0) {
-//					System.out.println("학번에 음수는 등록할 수 없습니다. 다시 시도해 주세요.");
-//					System.out.println();
-//					return;
-//				}
-			}
-		} catch (NumberFormatException e) {
-			// 학번이 입력되지 않았거나 숫자가 아닐 때
-			System.out.println("학번 입력 오류입니다. 다시 시도해 주세요.");
+			kor = next("국어 점수", Integer.class, t -> t <= 100 && t >= 0
+					, "점수는 0점부터 100점까지만 입력 가능합니다.");
+		} catch(NumberFormatException e) {
+			System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
 			System.out.println();
-			return;
-		} catch (NullPointerException e) {}
+		}
 		
-//		boolean nameForm = false;
-//		while(!nameForm) {
-//			name = nextLine("추가할 이름");
-			
-			name = next("추가할 이름", String.class, (t) -> {
-				if(t.length() == 0) {
-					System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
-					return false;
-				}
-				if(t.length() > 4 || t.length() < 2) {
-					System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
-					return false;
-				}
-				
-				for(int j = 0; j < t.length(); j++) {
-					if(t.charAt(j) > '힣' || t.charAt(j) < '가') {
-						System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요. 다시 시도해 주세요.");
-						return false;
-					}
-				}
-				return true;
-				}
-					, "");
-//			if(name.length() == 0) {
-//				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
-//				System.out.println();
-//				return;
-//			}
-			
-//			if(name.length() > 4 || name.length() < 2) {
-//				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
-//				System.out.println();
-////				continue;
-//			} 
-			for(int j = 0; j < name.length(); j++) {
-				if(name.charAt(j) > '힣' || name.charAt(j) < '가') {
-					System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");
-					System.out.println();
-					break;
-				} else if(j == name.length() - 1) {
-//					nameForm = true;
-				}
-			}
-//		}
-		
-//		boolean scoreForm = false;
-//		while(!scoreForm) {
-			try {
-				kor = next("국어 점수", Integer.class, t -> t <= 100 && t >= 0
-						, "점수는 0점부터 100점까지만 입력 가능합니다.");
-			} catch(NumberFormatException e) {
-				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-				System.out.println();
-//				continue;
-			} 
-//			scoreForm = overScore(kor);
-//		}
-//		scoreForm = false;
-//		while(!scoreForm) {
-			try {
-				eng = next("영어 점수", Integer.class, t -> t <= 100 && t >= 0
-						, "점수는 0점부터 100점까지만 입력 가능합니다.");
-			} catch(NumberFormatException e) {
-				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-				System.out.println();
-//				continue;
-			} 
-//			scoreForm = overScore(eng);
-//		}
-//		scoreForm = false;
-//		while(!scoreForm) {
-			try {
-				mat = next("수학 점수", Integer.class, t -> t <= 100 && t >= 0
-						, "점수는 0점부터 100점까지만 입력 가능합니다.");
-			} catch(NumberFormatException e) {
-				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-				System.out.println();
-//				continue;
-			} 
-//			scoreForm = overScore(mat);
-//		}
-		
+		try {
+			eng = next("영어 점수", Integer.class, t -> t <= 100 && t >= 0
+					, "점수는 0점부터 100점까지만 입력 가능합니다.");
+		} catch(NumberFormatException e) {
+			System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
+			System.out.println();
+		} 
+
+		try {
+			mat = next("수학 점수", Integer.class, t -> t <= 100 && t >= 0
+					, "점수는 0점부터 100점까지만 입력 가능합니다.");
+		} catch(NumberFormatException e) {
+			System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
+			System.out.println();
+		} 
+
 		students.add(new Student(no, name, kor, eng, mat));
 	}
 	
 	void list() {
-//		int input = checkRange(nextInt("1. 입력순 2. 학번순 3. 이름순 4. 석차순"), 1, 4);
 		int input = next("1. 입력순 2. 학번순 3. 이름순 4. 석차순", Integer.class, t -> t < 5 && t > 0
 				, "1부터 4까지의 숫자만 입력해 주세요.");
 		List<Student> tmp = null;
@@ -182,69 +136,63 @@ public class StudentService {
 		int eng = 0;
 		int mat = 0;
 		
-		boolean nameForm = false;
-		while(!nameForm) {
-			name = next("수정할 이름", String.class, t -> t.length() != 0
-					, "이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
-//			if(name.length() == 0) {
-//				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
-//				System.out.println();
-//				return;
-//			}
-			
-			if(name.length() > 4 || name.length() < 2) {
+		name = next("수정할 이름", String.class, (t) -> {
+			if(t.length() == 0) {
+				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
+				return false;
+			}
+			if(t.length() > 4 || t.length() < 2) {
 				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
-				System.out.println();
-				continue;
-			} 
-			for(int j = 0; j < name.length(); j++) {
-				if(name.charAt(j) > '힣' || name.charAt(j) < '가') {
-					System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");
-					System.out.println();
-					break;
-				} else if(j == name.length() - 1) {
-					nameForm = true;
+				return false;
+			}
+			
+			for(int j = 0; j < t.length(); j++) {
+				if(t.charAt(j) > '힣' || t.charAt(j) < '가') {
+					System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요. 다시 시도해 주세요.");
+					return false;
 				}
 			}
+			return true;
+			}
+				, "");
+		
+		if(name.length() > 4 || name.length() < 2) {
+			System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
+			System.out.println();
+		} 
+		for(int j = 0; j < name.length(); j++) {
+			if(name.charAt(j) > '힣' || name.charAt(j) < '가') {
+				System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");
+				System.out.println();
+				break;
+			} else if(j == name.length() - 1) {
+			}
 		}
+		
 		student.setName(name);
 		
-//		boolean scoreForm = false;
-//		while(!scoreForm) {
 			try {
 				kor = next("수정할 국어 점수", Integer.class, t -> t <= 100 && t >= 0
 						, "점수는 0점부터 100점까지만 입력 가능합니다.");
 			} catch(NumberFormatException e) {
 				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
 				System.out.println();
-//				continue;
 			} 
-//			scoreForm = overScore(kor);
-//		}
-//		scoreForm = false;
-//		while(!scoreForm) {
+
 			try {
 				eng = next("수정할 영어 점수", Integer.class, t -> t <= 100 && t >= 0
 						, "점수는 0점부터 100점까지만 입력 가능합니다.");
 			} catch(NumberFormatException e) {
 				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
 				System.out.println();
-//				continue;
 			} 
-//			scoreForm = overScore(eng);
-//		}
-//		scoreForm = false;
-//		while(!scoreForm) {
 			try {
 				mat = next("수정할 수학 점수", Integer.class, t -> t <= 100 && t >= 0
 						, "점수는 0점부터 100점까지만 입력 가능합니다.");
 			} catch(NumberFormatException e) {
 				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
 				System.out.println();
-//				continue;
 			} 
-//			scoreForm = overScore(mat);
-//		}
 		
 		student.setKor(kor);
 		student.setEng(eng);
@@ -266,7 +214,6 @@ public class StudentService {
 	// 중복된 기능 분리
 	private Student findByNo() {
 		Student student = null;
-//		int no = nextInt("학생의 학번 입력 > ");
 		int no = next("학생의 학번 입력", Integer.class, t -> t > 0
 				, "음수인 학번은 입력할 수 없습니다. 다시 시도해 주세요.");
 		
@@ -279,18 +226,6 @@ public class StudentService {
 		return student;
 	}
 	
-//	private boolean overScore(int score) {
-//		try {
-//			if (score > 100 || score < 0) {
-//				throw new RangeException(0, 100);
-//			}
-//		} catch (RangeException e) { 
-//			System.out.println("0점과 100점 이하의 점수만 입력 가능합니다.");
-//			System.out.println();
-//			return false;
-//		}
-//		return true;
-//	}
 	
 	// 오버로딩으로 점수 유효성 검증
 	int checkRange(int num, int start, int end) throws RangeException{
@@ -377,5 +312,20 @@ public class StudentService {
 //			totalSortStudents = new ArrayList<Student>(students);
 //			totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
 //		}
+//	}
+	
+	
+	
+//	private boolean overScore(int score) {
+//		try {
+//			if (score > 100 || score < 0) {
+//				throw new RangeException(0, 100);
+//			}
+//		} catch (RangeException e) { 
+//			System.out.println("0점과 100점 이하의 점수만 입력 가능합니다.");
+//			System.out.println();
+//			return false;
+//		}
+//		return true;
 //	}
 }
