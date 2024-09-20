@@ -91,12 +91,12 @@ public class Student implements Cloneable {
 		return String.format("%4d %6s %5d %5d %6d %6d %7.2f", no, name, kor, eng, mat, total(), avg());
 	}
 	
-	void update() {
-		this.name = StudentUtils.nextLine("수정할 이름");
-		this.kor = StudentUtils.nextInt("수정할 국어 점수");
-		this.eng = StudentUtils.nextInt("수정할 영어 점수");
-		this.mat = StudentUtils.nextInt("수정할 수학 점수");
-	}
+//	void update() {
+//		this.name = StudentUtils.nextLine("수정할 이름");
+//		this.kor = StudentUtils.nextInt("수정할 국어 점수");
+//		this.eng = StudentUtils.nextInt("수정할 영어 점수");
+//		this.mat = StudentUtils.nextInt("수정할 수학 점수");
+//	}
 
 	
 	// 클론 연습용	
