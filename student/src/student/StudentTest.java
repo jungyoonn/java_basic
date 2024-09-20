@@ -4,6 +4,8 @@ public class StudentTest {
 	public static void main(String[] args) {
 		Student s1 = new Student(1, "새똥이", 90, 80, 90);
 		
+		System.out.println("바바".matches("^[가-힣]*$"));
+		
 		// 복제의 방법은 클론 오버라이드와 생성자를 통한 복제 두 가지가 있다
 		//오버라이드 하고 형변환으로 타입 맞추고 implements Cloneable 해 준다
 		
