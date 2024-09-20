@@ -1,6 +1,7 @@
 package lesson16_stream;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BinaryOperator;
@@ -31,5 +32,12 @@ public class NumericStream {
 		bo = String::concat;
 		
 		System.out.println("a".concat("b"));
+		
+		Function<String, Exception> f2 = s -> new Exception(s);
+		// 리턴 타입이 익셉션
+		f2 = Exception::new; // 생성자 참조
+		
+		Comparator<String> com = (x, y) -> x.compareTo(y);
+		com = String::compareTo;
 	}
 }
