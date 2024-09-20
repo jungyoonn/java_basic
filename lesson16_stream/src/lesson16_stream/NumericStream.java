@@ -3,6 +3,9 @@ package lesson16_stream;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -21,5 +24,12 @@ public class NumericStream {
 		
 		is = "가나다라ABCD".chars();
 		is.forEach(s -> System.out.println((char)s));
+		
+		IntBinaryOperator ibo = Math::max;
+		Function<String, Integer> f = Integer::parseInt;
+		BinaryOperator<String> bo = (x, y) -> x.concat(y);
+		bo = String::concat;
+		
+		System.out.println("a".concat("b"));
 	}
 }
