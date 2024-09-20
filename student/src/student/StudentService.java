@@ -37,6 +37,7 @@ public class StudentService {
 			}
 		}
 		
+		// t.matches("^[가-힣]{2,4}")
 		name = next("추가할 이름", String.class, (t) -> {
 			if(t.length() == 0) {
 				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
@@ -56,15 +57,6 @@ public class StudentService {
 			return true;
 			}
 				, "");
-		
-		for(int j = 0; j < name.length(); j++) {
-			if(name.charAt(j) > '힣' || name.charAt(j) < '가') {
-				System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");
-				System.out.println();
-				break;
-			} else if(j == name.length() - 1) {
-			}
-		}
 		
 		try {
 			kor = next("국어 점수", Integer.class, t -> t <= 100 && t >= 0
@@ -141,7 +133,7 @@ public class StudentService {
 				System.out.println("이름을 입력하지 않으셨습니다. 다시 시도해 주세요.");
 				return false;
 			}
-			if(t.length() > 4 || t.length() < 2) {
+			if(t.matches("^[가-힣]{2,4}")) {
 				System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
 				return false;
 			}
@@ -155,19 +147,6 @@ public class StudentService {
 			return true;
 			}
 				, "");
-		
-		if(name.length() > 4 || name.length() < 2) {
-			System.out.println("이름의 길이가 맞지 않습니다. 다시 시도해 주세요.");
-			System.out.println();
-		} 
-		for(int j = 0; j < name.length(); j++) {
-			if(name.charAt(j) > '힣' || name.charAt(j) < '가') {
-				System.out.println("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");
-				System.out.println();
-				break;
-			} else if(j == name.length() - 1) {
-			}
-		}
 		
 		student.setName(name);
 		
