@@ -45,7 +45,7 @@ public class StudentUtils {
 					throw new IllegalArgumentException(errMsg);
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("올바른 숫자를 입력하세요.");
+				System.out.println("해당 입력 칸은 필수 입력이며 숫자만 입력할 수 있습니다.");
 			} catch (IllegalArgumentException iae) {
 				System.out.println(iae.getMessage());
 			} 

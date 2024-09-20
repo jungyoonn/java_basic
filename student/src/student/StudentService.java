@@ -29,13 +29,20 @@ public class StudentService {
 		int eng = 0;
 		int mat = 0;
 			
-		no = next("추가할 학번", Integer.class, t -> t > 0
-				, "학번에 음수는 등록할 수 없습니다. 다시 시도해 주세요.");
-		for(Student stu : students) {
-			if(stu.getNo() == no) {
-				throw new RuntimeException("학번이 중복입니다. 다시 시도해 주세요.");
+		no = next("추가할 학번", Integer.class, (t) ->  {
+			if(t < 0) {
+				System.out.println("학번에 음수는 등록할 수 없습니다. 다시 시도해 주세요.");
+				return false;
 			}
+			for(Student stu : students) {
+				if(stu.getNo() == t) {
+					System.out.println("학번이 중복입니다. 다시 시도해 주세요.");
+					return false;
+				}
+			}
+			return true;
 		}
+				, "");
 		
 		// t.matches("^[가-힣]{2,4}")
 		name = next("추가할 이름", String.class, (t) -> {
@@ -58,30 +65,15 @@ public class StudentService {
 			}
 				, "");
 		
-		try {
-			kor = next("국어 점수", Integer.class, t -> t <= 100 && t >= 0
-					, "점수는 0점부터 100점까지만 입력 가능합니다.");
-		} catch(NumberFormatException e) {
-			System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-			System.out.println();
-		}
-		
-		try {
-			eng = next("영어 점수", Integer.class, t -> t <= 100 && t >= 0
-					, "점수는 0점부터 100점까지만 입력 가능합니다.");
-		} catch(NumberFormatException e) {
-			System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-			System.out.println();
-		} 
-
-		try {
-			mat = next("수학 점수", Integer.class, t -> t <= 100 && t >= 0
-					, "점수는 0점부터 100점까지만 입력 가능합니다.");
-		} catch(NumberFormatException e) {
-			System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-			System.out.println();
-		} 
-
+		kor = next("국어 점수", Integer.class, t -> t <= 100 && t >= 0
+				, "점수는 0점부터 100점까지만 입력 가능합니다.");
+	
+		eng = next("영어 점수", Integer.class, t -> t <= 100 && t >= 0
+				, "점수는 0점부터 100점까지만 입력 가능합니다.");
+	
+		mat = next("수학 점수", Integer.class, t -> t <= 100 && t >= 0
+				, "점수는 0점부터 100점까지만 입력 가능합니다.");
+	
 		students.add(new Student(no, name, kor, eng, mat));
 	}
 	
@@ -150,29 +142,15 @@ public class StudentService {
 		
 		student.setName(name);
 		
-			try {
-				kor = next("수정할 국어 점수", Integer.class, t -> t <= 100 && t >= 0
-						, "점수는 0점부터 100점까지만 입력 가능합니다.");
-			} catch(NumberFormatException e) {
-				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-				System.out.println();
-			} 
-
-			try {
-				eng = next("수정할 영어 점수", Integer.class, t -> t <= 100 && t >= 0
-						, "점수는 0점부터 100점까지만 입력 가능합니다.");
-			} catch(NumberFormatException e) {
-				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-				System.out.println();
-			} 
-			try {
-				mat = next("수정할 수학 점수", Integer.class, t -> t <= 100 && t >= 0
-						, "점수는 0점부터 100점까지만 입력 가능합니다.");
-			} catch(NumberFormatException e) {
-				System.out.println("점수는 필수 입력이며 숫자만 입력 가능합니다.");
-				System.out.println();
-			} 
+		kor = next("수정할 국어 점수", Integer.class, t -> t <= 100 && t >= 0
+				, "점수는 0점부터 100점까지만 입력 가능합니다.");
 		
+		eng = next("수정할 영어 점수", Integer.class, t -> t <= 100 && t >= 0
+				, "점수는 0점부터 100점까지만 입력 가능합니다.");
+	
+		mat = next("수정할 수학 점수", Integer.class, t -> t <= 100 && t >= 0
+				, "점수는 0점부터 100점까지만 입력 가능합니다.");
+			
 		student.setKor(kor);
 		student.setEng(eng);
 		student.setMat(mat);
@@ -205,18 +183,6 @@ public class StudentService {
 		return student;
 	}
 	
-	
-	// 오버로딩으로 점수 유효성 검증
-	int checkRange(int num, int start, int end) throws RangeException{
-		if(num < start || num > end) {
-			throw new RangeException(start, end);
-		}
-		return num;
-	}
-	int checkRange(int num) throws RangeException {
-		return checkRange(num, 0, 100);
-	}
-	
 	//정렬
 	void cloneAndSort() {
 		totalSortStudents = new ArrayList<Student>(students);
@@ -226,7 +192,6 @@ public class StudentService {
 		noSortStudents.sort((o1, o2) -> o2.getNo() - o1.getNo());
 		nameSortStudents.sort((o1, o2) -> o1.getName().hashCode() - o2.getName().hashCode());
 		totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
-		
 		
 //		nameSortStudents.sort(new Comparator<Student>() {
 //			public int compare(Student o1, Student o2) {
@@ -306,5 +271,18 @@ public class StudentService {
 //			return false;
 //		}
 //		return true;
+//	}
+	
+	
+	
+	// 오버로딩으로 점수 유효성 검증
+//	int checkRange(int num, int start, int end) throws RangeException{
+//		if(num < start || num > end) {
+//			throw new RangeException(start, end);
+//		}
+//		return num;
+//	}
+//	int checkRange(int num) throws RangeException {
+//		return checkRange(num, 0, 100);
 //	}
 }
