@@ -51,4 +51,31 @@ public class StudentUtils {
 			} 
 		}
 	}
+	
+	// 이름 입력 폼
+	static <T> T next(String msg, Class<T> clazz, Predicate<T> con1, Predicate<T> con2, Predicate<T> con3, String errMsg) {
+		while (true) {
+			try {
+				T t = next(msg, clazz);
+				if (con1.test(t) && con2.test(t) && con3.test(t)) {
+					return t;
+				} else {
+					if(!con1.test(t)) {
+						throw new IllegalArgumentException("이름을 입력하지 않으셨습니다.");
+					} else if(!con2.test(t)) {
+						throw new IllegalArgumentException("이름의 길이가 맞지 않습니다.");						
+					} else if(!con3.test(t)) {
+						throw new IllegalArgumentException("이름은 초성을 포함하지 않은 한글로만 작성해 주세요.");												
+					}
+					throw new IllegalArgumentException(errMsg);
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("해당 입력 칸은 필수 입력이며 숫자만 입력할 수 있습니다.");
+			} catch (IllegalArgumentException iae) {
+				System.out.println(iae.getMessage());
+			} 
+		}
+	}
+	
+	
 }
