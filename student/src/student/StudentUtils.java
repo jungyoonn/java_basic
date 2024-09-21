@@ -52,7 +52,7 @@ public class StudentUtils {
 		}
 	}
 	
-	// 이름 입력 폼
+	 // 이름 입력 폼
 	static <T> T next(String msg, Class<T> clazz, Predicate<T> con1, Predicate<T> con2, Predicate<T> con3, String errMsg) {
 		while (true) {
 			try {
@@ -76,6 +76,4 @@ public class StudentUtils {
 			} 
 		}
 	}
-	
-	
 }
