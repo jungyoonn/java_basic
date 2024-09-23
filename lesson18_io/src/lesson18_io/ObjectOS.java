@@ -32,6 +32,8 @@ public class ObjectOS {
 	}
 }
 
+// 클래스 변수는 직렬화 대상이 아니다 , 직렬화 대상은 반드시 Serializable을 구현해야 한다
+
 class Member implements Serializable {
 	String name;
 	int age;
