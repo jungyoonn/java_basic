@@ -2,28 +2,48 @@ package student;
 
 import static student.StudentUtils.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
 // Logic
 public class StudentService {
-	private List<Student> students = new ArrayList<Student>();
+	private List<Student> students = new ArrayList<Student>(Arrays.asList(
+			new Student(1, "새똥이", 80, 90, 100),
+			(new Student(2, "개똥이", 77, 66, 77)),
+			(new Student(3, "소똥이", 64, 34, 66)),
+			(new Student(4, "말똥이", 99, 99, 99))));
 	// 원본 배열에 추가 혹은 수정이 일어났을 때 초기화
 	private List<Student> totalSortStudents;
 	private List<Student> noSortStudents;
 	private List<Student> nameSortStudents;
 	
 	{
-		students.add(new Student(1, "새똥이", 80, 90, 100));
-		students.add(new Student(2, "개똥이", 77, 66, 77));
-		students.add(new Student(3, "소똥이", 64, 34, 66));
-		students.add(new Student(4, "말똥이", 99, 99, 99));
+//		students.add(new Student(1, "새똥이", 80, 90, 100));
+//		students.add(new Student(2, "개똥이", 77, 66, 77));
+//		students.add(new Student(3, "소똥이", 64, 34, 66));
+//		students.add(new Student(4, "말똥이", 99, 99, 99));
 		cloneAndSort();
+	} 
+// 초기화 블럭 대신 추가 혹은 삭제가 일어났을 시에도 리스트가 유지될 수 있도록 ObjectInput/Output을 이용하기
+	void stuList() throws FileNotFoundException, IOException, ClassNotFoundException  {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("학생명단.txt"));
+		oos.writeObject(students);
+		
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("학생명단.txt"));
+		List<Student> sList = (List<Student>)ois.readObject();
+		sList.forEach(System.out::println);
 	}
 	
-	void add() {
+	void add() throws FileNotFoundException, ClassNotFoundException, IOException {
 		int no = 0;
 		String name = null;
 		int kor = 0;
@@ -76,6 +96,8 @@ public class StudentService {
 				, "점수는 0점부터 100점까지만 입력 가능합니다.");
 	
 		students.add(new Student(no, name, kor, eng, mat));
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("학생명단.txt"));
+		oos.writeObject(students);
 	}
 	
 	void list() {
@@ -109,7 +131,7 @@ public class StudentService {
 	}
 	
 	// 이름, 점수 
-	void modify() {
+	void modify() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Student student = findByNo(next("수정할 학번을 입력하세요", Integer.class
 																, n -> findByNo(n) != null
 																, "학생을 찾을 수 없습니다."));
@@ -142,9 +164,11 @@ public class StudentService {
 		student.setKor(kor);
 		student.setEng(eng);
 		student.setMat(mat);
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("학생명단.txt"));
+		oos.writeObject(students);
 	}
 	
-	void remove() {
+	void remove() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Student student = findByNo(next("삭제할 학번을 입력하세요", Integer.class
 																	, n -> findByNo(n)!=null
 																	, "학생을 찾을 수 없습니다."));
@@ -156,6 +180,8 @@ public class StudentService {
 		if(students.contains(student)) { // 위에서 조건문을 처리했기 때문에 if문 굳이 필요 x
 			students.remove(student);
 		}
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("학생명단.txt"));
+		oos.writeObject(students);
 	}
 	
 	// 중복된 기능 분리
