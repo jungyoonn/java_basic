@@ -2,8 +2,13 @@ package lesson17_thread;
 
 public class ThreadEx extends Thread {
 	public static void main(String[] args) {
-		new ThreadExtend().start();
-		new Thread(new RunnableImpl()).start();
+		Thread t1 = new ThreadExtend();
+		Thread t2 = new Thread(new RunnableImpl());
+		
+		t2.setPriority(6); // 우선순위 지정
+		
+		t1.start();
+		t2.start();
 		// start() : 멀티 스레드를 시작하는 메서드
 		
 		System.out.println("main 종료 " + currentThread().getName());
