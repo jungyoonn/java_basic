@@ -10,7 +10,7 @@ public class StudentMain {
 		// UI
 		// CRUD
 		StudentService ss = new StudentService();
-//		ss.stuList();
+		ss.stuList();
 		while(true) {
 			// try catch를 여기서 처리하면 서비스의 코드가 줄어듦! (넘버포맷 익셉션)
 			try {

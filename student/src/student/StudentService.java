@@ -38,9 +38,9 @@ public class StudentService {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("학생명단.txt"));
 		oos.writeObject(students);
 		
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("학생명단.txt"));
-		List<Student> sList = (List<Student>)ois.readObject();
-		sList.forEach(System.out::println);
+//		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("학생명단.txt"));
+//		List<Student> sList = (List<Student>)ois.readObject();
+//		sList.forEach(System.out::println);
 	}
 	
 	void add() throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -100,7 +100,7 @@ public class StudentService {
 		oos.writeObject(students);
 	}
 	
-	void list() {
+	void list() throws FileNotFoundException, IOException, ClassNotFoundException {
 		int input = next("1. 입력순 2. 학번순 3. 이름순 4. 석차순", Integer.class, t -> t < 5 && t > 0
 				, "1부터 4까지의 숫자만 입력해 주세요.");
 		List<Student> tmp = null;
@@ -127,6 +127,9 @@ public class StudentService {
 		for(int i = 0; i < students.size(); i++) {
 			System.out.println(tmp.get(i));
 		}
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("학생명단.txt"));
+		tmp = (List<Student>)ois.readObject();
+		tmp.forEach(System.out::println);
 		System.out.println();
 	}
 	
