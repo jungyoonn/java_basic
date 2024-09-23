@@ -16,8 +16,11 @@ public class ObjectOS {
 		
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("oos.txt"));
 		oos.writeObject(list);
+		oos.writeObject(list);
 		
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("oos.txt"));
 		System.out.println(ois.readObject());
+		System.out.println(ois.readObject());
+//		System.out.println(ois.readObject()); write 한 만큼만 read 할 수 있으므로 출력이 안 됨
 	}
 }
