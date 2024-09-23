@@ -110,11 +110,13 @@ public class StudentService {
 	
 	// 이름, 점수 
 	void modify() {
-		Student student = findByNo();
-		if(student == null) {
-			System.out.println("학생을 찾을 수 없습니다.");
-			return;
-		}
+		Student student = findByNo(next("수정할 학번을 입력하세요", Integer.class
+																, n -> findByNo(n) != null
+																, "학생을 찾을 수 없습니다."));
+//		if(student == null) {
+//			System.out.println("학생을 찾을 수 없습니다.");
+//			return;
+//		}
 		
 		String name = null;
 		int kor = 0;
@@ -143,11 +145,13 @@ public class StudentService {
 	}
 	
 	void remove() {
-		Student student = findByNo();
-		if(student == null) {
-			System.out.println("학생을 찾을 수 없습니다.");
-			return;
-		}
+		Student student = findByNo(next("삭제할 학번을 입력하세요", Integer.class
+																	, n -> findByNo(n)!=null
+																	, "학생을 찾을 수 없습니다."));
+//		if(student == null) {
+//			System.out.println("학생을 찾을 수 없습니다.");
+//			return;
+//		}
 		
 		if(students.contains(student)) { // 위에서 조건문을 처리했기 때문에 if문 굳이 필요 x
 			students.remove(student);
@@ -155,10 +159,10 @@ public class StudentService {
 	}
 	
 	// 중복된 기능 분리
-	private Student findByNo() {
+	private Student findByNo(int no) {
 		Student student = null;
-		int no = next("학생의 학번 입력", Integer.class, t -> t > 0
-				, "음수인 학번은 입력할 수 없습니다. 다시 시도해 주세요.");
+//		int no = next("학생의 학번 입력", Integer.class, t -> t > 0
+//				, "음수인 학번은 입력할 수 없습니다. 다시 시도해 주세요.");
 		
 		for(int i = 0; i < students.size(); i++) {
 			if(students.get(i).getNo() == no) {
