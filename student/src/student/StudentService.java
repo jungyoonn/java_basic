@@ -37,7 +37,7 @@ public class StudentService {
 		cloneAndSort();
 	} 
 
-	void add() throws FileNotFoundException, ClassNotFoundException, IOException {
+	void add() {
 		int no = 0;
 		String name = null;
 		int kor = 0;
@@ -96,7 +96,7 @@ public class StudentService {
 		students.add(student);
 	}
 	
-	void list() throws FileNotFoundException, IOException, ClassNotFoundException {
+	void list() {
 		int input = next("1. 입력순 2. 학번순 3. 이름순 4. 석차순", Integer.class, t -> t < 5 && t > 0
 				, "1부터 4까지의 숫자만 입력해 주세요.");
 		List<Student> tmp = null;
@@ -134,7 +134,7 @@ public class StudentService {
 	}
 	
 	// 이름, 점수 
-	void modify() throws FileNotFoundException, ClassNotFoundException, IOException {
+	void modify() {
 		Student student = findByNo(next("수정할 학번을 입력하세요", Integer.class
 																, n -> findByNo(n) != null
 																, "학생을 찾을 수 없습니다."));
@@ -165,7 +165,7 @@ public class StudentService {
 		student.setMat(mat);
 	}
 	
-	void remove() throws FileNotFoundException, ClassNotFoundException, IOException {
+	void remove() {
 		Student student = findByNo(next("삭제할 학번을 입력하세요", Integer.class
 																	, n -> findByNo(n)!=null
 																	, "학생을 찾을 수 없습니다."));
