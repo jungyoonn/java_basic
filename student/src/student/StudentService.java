@@ -2,57 +2,41 @@ package student;
 
 import static student.StudentUtils.*;
 
-import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 // Logic
+@SuppressWarnings("unchecked")
 public class StudentService {
 	private List<Student> students = new ArrayList<Student>();
 	// 원본 배열에 추가 혹은 수정이 일어났을 때 초기화
 	private List<Student> totalSortStudents;
 	private List<Student> noSortStudents;
 	private List<Student> nameSortStudents;
-	ObjectOutputStream oos;
-	ObjectInputStream ois;
-	FileOutputStream fo;
 	
-	
+// 추가 혹은 삭제가 일어났을 시에도 리스트가 유지될 수 있도록 ObjectInput/Output을 이용하기
 	{
-//		students.add(new Student(1, "새똥이", 80, 90, 100));
-//		students.add(new Student(2, "개똥이", 77, 66, 77));
-//		students.add(new Student(3, "소똥이", 64, 34, 66));
-//		students.add(new Student(4, "말똥이", 99, 99, 99));
-		
-		try {
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.txt"));){
 			students = (List<Student>)ois.readObject();
-		} catch (ClassNotFoundException | IOException e) {
+		} catch (FileNotFoundException e) {
+			students.add(new Student(1, "새똥이", 80, 90, 100));
+			students.add(new Student(2, "개똥이", 77, 66, 77));
+			students.add(new Student(3, "소똥이", 64, 34, 66));
+			students.add(new Student(4, "말똥이", 99, 99, 99));
+			System.out.println("파일 검색 실패, 초기화 더미 데이터 처리 완료");
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch(NullPointerException e) {
-			
 		}
 		
-		try {
-		cloneAndSort(students);
-		} catch(RuntimeException e) {}
+		cloneAndSort();
 	} 
-// 초기화 블럭 대신 추가 혹은 삭제가 일어났을 시에도 리스트가 유지될 수 있도록 ObjectInput/Output을 이용하기
-	void stuList() throws FileNotFoundException, IOException, ClassNotFoundException  {
-		oos = new ObjectOutputStream(new FileOutputStream("학생명단.txt"));
-		oos.writeObject(students);
-		
-//		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("학생명단.txt"));
-//		List<Student> sList = (List<Student>)ois.readObject();
-//		sList.forEach(System.out::println);
-	}
-	
+
 	void add() throws FileNotFoundException, ClassNotFoundException, IOException {
 		int no = 0;
 		String name = null;
@@ -110,26 +94,24 @@ public class StudentService {
 		}
 		Student student = new Student(no, name, kor, eng, mat);
 		students.add(student);
-		oos = new ObjectOutputStream(new FileOutputStream("학생명단.txt"));
-		oos.writeObject(student);
 	}
 	
 	void list() throws FileNotFoundException, IOException, ClassNotFoundException {
 		int input = next("1. 입력순 2. 학번순 3. 이름순 4. 석차순", Integer.class, t -> t < 5 && t > 0
 				, "1부터 4까지의 숫자만 입력해 주세요.");
 		List<Student> tmp = null;
-		ois = new ObjectInputStream(new FileInputStream("학생명단.txt"));
-		List<Student> result = null;
-		try {
-			result = (List<Student>)ois.readObject();
-		} catch(EOFException e) {
-			
-		}
-		cloneAndSort(result);
+//		ois = new ObjectInputStream(new FileInputStream("학생명단.txt"));
+//		List<Student> result = null;
+//		try {
+//			result = (List<Student>)ois.readObject();
+//		} catch(EOFException e) {
+//			
+//		}
+		cloneAndSort();
 		
 		switch (input) {
 		case 1:
-			tmp = result;
+			tmp = students;
 			break;
 		case 2:
 			tmp = noSortStudents;
@@ -181,7 +163,6 @@ public class StudentService {
 		student.setKor(kor);
 		student.setEng(eng);
 		student.setMat(mat);
-		oos.writeObject(student);
 	}
 	
 	void remove() throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -192,8 +173,6 @@ public class StudentService {
 		if(students.contains(student)) { // 위에서 조건문을 처리했기 때문에 if문 굳이 필요 x
 			students.remove(student);
 		}
-		
-		oos.writeObject(students);
 	}
 	
 	// 중복된 기능 분리
@@ -211,9 +190,10 @@ public class StudentService {
 		return student;
 	}
 	
-	void saveAndWrite() throws IOException {
-		oos = new ObjectOutputStream(new FileOutputStream("학생명단.txt"));
-		oos.writeObject(students);
+	void saveAndWrite() {
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data.txt"));) {
+			oos.writeObject(students);
+		} catch(IOException e) {}
 	}
 	
 	boolean validation (String msg, boolean b, String str) {
@@ -228,30 +208,7 @@ public class StudentService {
 	}
 	
 	//정렬
-	void cloneAndSort(List<Student> s) {
-		totalSortStudents = new ArrayList<Student>(s);
-		noSortStudents = new ArrayList<Student>(s);
-		nameSortStudents =  new ArrayList<Student>(s);
-		
-		noSortStudents.sort((o1, o2) -> o2.getNo() - o1.getNo());
-		nameSortStudents.sort((o1, o2) -> o1.getName().hashCode() - o2.getName().hashCode());
-		totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
-		
-//		nameSortStudents.sort(new Comparator<Student>() {
-//			public int compare(Student o1, Student o2) {
-//				return o1.getName().compareTo(o2.getName());
-//			}
-//		}); 람다식 대신 Comparator를 이용한 방법도 있다
-	}
-	void cloneAndSort() throws ClassNotFoundException, IOException {
-		
-//		List<Student> result = null;
-//		
-//		try {
-//			result = (List<Student>)ois.readObject();
-//		} catch(NullPointerException e) {}
-//		catch(EOFException e) {}
-		
+	void cloneAndSort() {
 		totalSortStudents = new ArrayList<Student>(students);
 		noSortStudents = new ArrayList<Student>(students);
 		nameSortStudents =  new ArrayList<Student>(students);
@@ -260,6 +217,7 @@ public class StudentService {
 		nameSortStudents.sort((o1, o2) -> o1.getName().hashCode() - o2.getName().hashCode());
 		totalSortStudents.sort((o1, o2) -> o2.total() - o1.total());
 		
+		saveAndWrite();
 //		nameSortStudents.sort(new Comparator<Student>() {
 //			public int compare(Student o1, Student o2) {
 //				return o1.getName().compareTo(o2.getName());

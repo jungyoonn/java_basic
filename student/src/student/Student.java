@@ -2,6 +2,7 @@ package student;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Student implements Cloneable, Serializable {
 	private int no;
 	private String name;
