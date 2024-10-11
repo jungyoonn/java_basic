@@ -2,7 +2,13 @@ package student;
 
 import java.io.Serializable;
 
+import lombok.*;
+
 @SuppressWarnings("serial")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student implements Cloneable, Serializable {
 	private int no;
 	private String name;
@@ -10,8 +16,6 @@ public class Student implements Cloneable, Serializable {
 	private int eng;
 	private int mat;
 	private int[] arr;
-	
-	public Student() { }
 
 	// 생성자 (필드를 다 쓰는 생성자 단 하나)
 	public Student(int no, String name, int kor, int eng, int mat) {
@@ -30,51 +34,6 @@ public class Student implements Cloneable, Serializable {
 		mat = s.mat;
 		if(s.arr != null)
 		arr = s.arr.clone();
-	}
-	
-	// 학번
-	public int getNo() {
-		return no;
-	}
-	
-	public void setNo(int no) {
-		this.no = no;
-	}
-	
-	// 이름
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	// 국어 점수
-	public int getKor() {
-		return kor;
-	}
-	
-	public void setKor(int kor) {
-		this.kor = kor;
-	}
-	
-	// 영어 점수
-	public int getEng() {
-		return eng;
-	}
-	
-	public void setEng(int eng) {
-		this.eng = eng;
-	}
-	
-	// 수학 점수
-	public int getMat() {
-		return mat;
-	}
-	
-	public void setMat(int mat) {
-		this.mat = mat;
 	}
 	
 	// 총점
